@@ -41,7 +41,7 @@ Route::post('atencion','PacientesController@atencion');
 Route::post('ausente','PacientesController@ausente');
 Route::get('adminpaciente','PacientesController@adminpacientes');
 Route::get('informemedicos','PacientesController@informemedico');
-Route::post('cargarlaboratorios','ClientesController@laboratorios');
+Route::post('pacientes/{id}/cargarlaboratorios','ClientesController@laboratorios');
 
 Route::get('{id}/evaluacionpsicologica/{ids}','PacientesController@psicologica');
 Route::get('{id}/evaluacionmedica/{ids}','PacientesController@medica');

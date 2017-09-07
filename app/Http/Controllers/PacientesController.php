@@ -18,6 +18,7 @@ use Darsalud\EvaPsico;
 use Darsalud\EvaOto;
 use Darsalud\EvaOftalmo;
 use Darsalud\Receta;
+use Darsalud\Categorialaboratorio;
 
 class PacientesController extends Controller
 {
@@ -477,7 +478,8 @@ echo '<div style=" width:25%; height:auto;float:left; padding: 2%; margin-left:1
     }
     public function laboratorios($id)
     {   $paciente= Paciente::find($id);
-        return view('laboratorios')->with('paciente',$paciente)->with('id',$id);
+        $categorias = Categorialaboratorio::get();
+        return view('laboratorios')->with('paciente',$paciente)->with('id',$id)->with('categorias',$categorias);
     }
 
      public function otorrino($id, $ids)
