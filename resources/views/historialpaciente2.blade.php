@@ -43,7 +43,7 @@
         </div>
         </div>
         </form>
- </fieldset>      
+ </fieldset>
 <!--fieldset style="background-color:#E9EBBF; padding: 2%;" class="form-group">
 	<legend class="form-group">Historial del paciente</legend>
 	          <div class="form-group">

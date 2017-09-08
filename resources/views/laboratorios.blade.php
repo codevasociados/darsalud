@@ -45,8 +45,8 @@ function limita(elEvento, maximoCaracteres) {
     $("#categoria").change(function () {
             $("#categoria option:selected").each(function () {
              id = $(this).val();
-             $.post("cargarlaboratorios", { id: id }, function(data){
-                 $("#tablabody").html(data);
+             $.post('cargarlaboratorios', { id: id }, function(data){
+                 $("#lab").html(data);
              });
          });
         });
@@ -67,10 +67,10 @@ function limita(elEvento, maximoCaracteres) {
         <script type='text/javascript' language='javascript' class='init'>
         var cont=0;
        function agregavalor(data1,data2,data3){
-       cont++;
-       var fila="<tr id=fila"+cont+" ><td>"+data1+" <input  type='hidden' name='idproducto[]' value="+data3+">s</td><td><input type='text' readonly='yes' class='form-control' value="+data2+" name='pre_pro[]'></td><td><input required class='form-control' type="+"number"+" id="+"can_pro"+" min="+"1"+" name="+"can_pro"+"[]></td><td class="+"info"+"><input class="+"form-control"+" readonly="+"yes"+" type="+"number"+" name="+"sub_pro"+"[]></td><td><button type="+"button"+" class='."'btn btn-danger btn-circle btn-lg2' "."onclick=javascript:elimina('fila".'"+cont+"'."') title='Eliminar'><i class='fa fa-minus'></i></button>'".'</td></tr>
 
-           $('."'#tabla'".').append(fila);
+       var fila="<tr id=fila"+cont+"><td>"+data1+" <input  type='hidden' name='idproducto[]' value="+data3+"></td><td><input type='text' readonly='yes' class='form-control' value="+data2+" name='pre_pro[]'></td><td><button type='button' class='btn btn-danger btn-circle btn-lg2' onclick='javascript:elimina("+'"tabla"'+");' title='Eliminar'><i class='fa fa-minus'></i></button></td></tr>'";
+           $('#tabla').append(fila);
+         }
            </script>
 <script type="text/javascript">
   function pdfreceta()
@@ -179,15 +179,20 @@ return false;
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Categoria:</label>
                     <div class="col-lg-3">
-                        <select class="form-control" name="">
+                        <select class="form-control" id="categoria" required>
                           <option value="">SELECCIONE</option>
+                          @foreach($categorias as $cat)
+                            <option value="{{$cat->id}}">{{$cat->DES_CAL}}</option>
+                          @endforeach
                         </select>
                     </div>
                     <label class="col-lg-2 control-label">Laboratorio:</label>
                     <div class="col-lg-3">
-                        <select class="form-control" name="">
-                          <option value="">SELECCIONE</option>
+                        <select class="form-control" name="" id="lab">
                         </select>
+                    </div>
+                    <div class="col-lg-2">
+                      <button type="button" onclick="javascript:agregavalor('1','23','23');" class="btn btn-primary" name="button">Añadir Laboratorio</button>
                     </div>
                    </div>
                    </fieldset>
