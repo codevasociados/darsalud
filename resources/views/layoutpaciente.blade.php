@@ -33,7 +33,7 @@
                     </button>
                     <a class="navbar-brand" href="/Darsalud/public" style="color: #21D3F3; padding-left: 14%; font-size: 25px;"><span class="fa fa-medkit"></span> <b>DARSALUD</b></a>
                 </div><!-- navbar-header-->
- 
+
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li class="active" ><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="fa fa-reorder" aria-hidden="true" style="color: #fff;"></span></button></li>
@@ -44,7 +44,7 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
- 
+
                 <li class="active" style="height:auto;">
                     <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-md fa-stack-1x" style="font-size:50px; margin-top:50%; margin-left: -25%; "></i></span><b style="margin-left:10%;"> Usuario - {{Auth::user()->NOM_USU}} </b><br/><span class="fa fa-circle" style="color:#00FF06; font-size:10px; margin-left:23%;"> </span> Activo<span class="fa fa-sort-desc"></span></a>
                        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
@@ -52,11 +52,11 @@
                         <li><a href="logout">Cerrar sesion</a></li>
                     </ul>
                 </li>
-                
+
                 <li style="background-color:#333;">
                     <a href="#" style="pointer-events: none;"><span class="fa-stack fa-lg pull-left"><i class="fa fa-menu fa-stack-1x "></i></span>Menu</a>
                 </li>
-              
+
                 <li>
                     <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-ambulance fa-stack-1x "></i></span> Consultas</a>
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
@@ -64,7 +64,7 @@
                         <li><a href="{{ url('pacientessegip') }}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-medkit fa-stack-1x "></i></span>Recetas</a></li>
                         <li><a href="{{ url('pacientesdarsalud') }}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-medkit fa-stack-1x "></i></span>Laboratorios</a></li>
                         <li><a href="{{ url('facturacion') }}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-medkit fa-stack-1x "></i></span>Evaluacion oftalmologica</a></li>
- 
+
                     </ul>
                 </li>
             </ul>

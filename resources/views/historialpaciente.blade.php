@@ -55,7 +55,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ url('pacientes/'.$id.'/consultaext') }}"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user-times fa-stack-1x "></i></span>Consulta externa</a>
+                    <a href="{{ url('pacientes/'.$id.'/historiabasica') }}"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user-times fa-stack-1x "></i></span>Historia Basica</a>
                 </li>
                 <li>
                     <a href="{{ url('pacientes/'.$id.'/recetas') }}"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user-times fa-stack-1x "></i></span>Receta</a>
