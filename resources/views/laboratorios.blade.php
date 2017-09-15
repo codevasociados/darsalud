@@ -18,7 +18,6 @@
 <script type="text/javascript">
 function limita(elEvento, maximoCaracteres) {
   var elemento = document.getElementById("texto");
-
   // Obtener la tecla pulsada
   var evento = elEvento || window.event;
   var codigoCaracter = evento.charCode || evento.keyCode;
@@ -26,7 +25,6 @@ function limita(elEvento, maximoCaracteres) {
   if(codigoCaracter == 37 || codigoCaracter == 39) {
     return true;
   }
-
   // Permitir borrar con la tecla Backspace y con la tecla Supr.
   if(codigoCaracter == 8 || codigoCaracter == 46) {
     return true;
@@ -68,12 +66,12 @@ function limita(elEvento, maximoCaracteres) {
         var cont=0;
        function agregavalor(data1,data2,data3){
 
-       var fila="<tr id=fila"+cont+"><td>"+data1+" <input  type='hidden' name='idproducto[]' value="+data3+"></td><td><input type='text' readonly='yes' class='form-control' value="+data2+" name='pre_pro[]'></td><td><button type='button' class='btn btn-danger btn-circle btn-lg2' onclick='javascript:elimina("+'"tabla"'+");' title='Eliminar'><i class='fa fa-minus'></i></button></td></tr>'";
+       var fila="<tr id=fila"+cont+"><td>"+data1+" <input  type='hidden' name='idproducto[]' value="+data3+"></td><td><input type='text' readonly='yes' class='form-control' value="+data2+" name='pre_pro[]'></td><td><button type='button' class='btn btn-danger btn-circle btn-lg2' onclick='javascript:elimina('fila".'"'+cont+'"'."');' title='Eliminar'><i class='fa fa-minus'></i></button></td></tr>'";
            $('#tabla').append(fila);
          }
            </script>
 <script type="text/javascript">
-  function pdfreceta()
+  function pdflaboratorio()
   {
     document.fmedica.submit();
   }
@@ -107,24 +105,18 @@ return false;
  <nav class="navbar navbar-inverse no-margin" style="border-radius: 0; background-color: #000;">
     <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header fixed-brand" >
-
                     <a class="navbar-brand" href="{{ url('pacientes/'.$id)}}" style="color: #21D3F3; padding-left: 14%; font-size: 25px;"><span class="fa fa-medkit"></span> <b>DARSALUD</b></a>
                 </div><!-- navbar-header-->
-
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                </div><!-- bs-example-navbar-collapse-1 -->
+              </div><!-- bs-example-navbar-collapse-1 -->
     </nav>
-
         <!-- Sidebar -->
-
         <!-- Page Content -->
-
-        <form class="form-horizontal" action="pdfreceta" method="post" target="_blank" accept-charset="UTF-8" name="fmedica" enctype="multipart/form-data">
+        <form class="form-horizontal" action="pdflaboratorio" method="post" target="_blank" accept-charset="UTF-8" name="fmedica" enctype="multipart/form-data">
 
                        <div class="container">
 <div  style="width:100%; background:#fff; margin-top:1%;">
-    <div class="alert alert-info" style="font-size:23px;">Laboratorios<a style="margin-left:50%;" onclick='javascript:preguntar({{ $id }});'  class="btn btn-warning">Volver al historial</a> <a target="_blank" style="margin-left:1%;" class = "btn btn-primary" onclick="javascript:pdfreceta();"><span class="fa fa-print"></span>
+    <div class="alert alert-info" style="font-size:23px;">Laboratorios<a style="margin-left:50%;" onclick='javascript:preguntar({{ $id }});'  class="btn btn-warning">Volver al historial</a> <a target="_blank" style="margin-left:1%;" class = "btn btn-primary" onclick="javascript:pdflaboratorio();"><span class="fa fa-print"></span>
               Imprimir
             </a>
 

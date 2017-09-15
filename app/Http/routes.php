@@ -55,6 +55,7 @@ Route::post('pacientes/{id}/pdfreceta','EvaluacionesController@pdfreceta');
 
 Route::get('pacientes/{id}/recetas','PacientesController@recetas');
 Route::get('pacientes/{id}/laboratorios','PacientesController@laboratorios');
+Route::post('pacientes/{id}/pdflaboratorio','PdfController@pdflaboratorios');
 Route::get('pacientes/{id}/historiabasica','historiabasicaController@index');
 Route::get('{id}/evaluacionmedica/{ids}/finalizar','PacientesController@finalizar');
 Route::post('{id}/evaluacionpsicologica/{ids}/pdfpsico','EvaluacionesController@pdfpsico');

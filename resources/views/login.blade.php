@@ -8,7 +8,7 @@
     <meta name="author" content="">
 	<title>Iniciar sesion - Dar salud</title>
 	{!! Html::style('assets/css/bootstrap.css') !!}
-	
+
 	  <link href="font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
 	{!! Html::style('assets/css/login.css') !!}
 	{!! Html::script('assets/js/ajax.js')!!}
@@ -19,15 +19,14 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            
+
             <div class="account-wall" style="background-color: #AAE0F0;">
-                <img class="" style="width: 55%; margin-left: 23%;" src="{{ asset('img/logo.png') }}" 
+                <img class="" style="width: 55%; margin-left: 23%;" src="{{ asset('img/logo.png') }}"
                     alt="">
                 <form class="form-signin" method="post" action="login">
                 @if (count($errors))
     <ul>
         @foreach($errors->all() as $error)
-           
             <li>{{ $error }}</li>
         @endforeach
     </ul>
@@ -39,14 +38,14 @@
                 <br/>
                 <button class="btn btn-lg btn-primary btn-block" type="submit"><span class="fa fa-sign-in"></span>
                     Ingresar</button>
-                
+
                 </form>
             </div>
-            
+
         </div>
     </div>
 </div>
- 
+
     {!! Html::script('assets/js/bootstrap.js')!!}
     {!! Html::script('assets/js/bootstrap.min.js')!!}
 	{!! Html::script('assets/js/sidebar2.js')!!}

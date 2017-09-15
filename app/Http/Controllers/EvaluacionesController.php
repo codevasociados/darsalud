@@ -431,7 +431,7 @@ class EvaluacionesController extends Controller
         $pdf->SetAutoPageBreak(TRUE, 10);
         $pdf->SetMargins(15, 15, 10);
         $pdf->AddPage();
-        $pdf->Image('storage/Optometria.png', 0, 1, 135, 20, 'PNG', '', '', true, 250, '', false, false, false, false, false, false);
+        $pdf->Image('img/Optometria.png', 0, 1, 135, 20, 'PNG', '', '', true, 250, '', false, false, false, false, false, false);
 
         $pdf->SetFont('','B','9');
         $pdf->SetXY(10, 39);
@@ -1105,7 +1105,7 @@ class EvaluacionesController extends Controller
         $date = \Carbon\Carbon::createFromDate($edad,$edad2,$edad3)->age;
         $pdf->Write(0,$date,'','',false);
         $pacientes= Paciente::find($id);
-        $pdf->Image('storage/'.Carbon::now()->format('d-m-Y').'-'.preg_replace('[\s+]','',$pacientes->CI_PAC).'.jpg', 170, 40, 35, 35,'PNG', '', '', true, 250, '', false, false, false, false, false, false);
+        $pdf->Image('img/'.Carbon::now()->format('d-m-Y').'-'.preg_replace('[\s+]','',$pacientes->CI_PAC).'.jpg', 170, 40, 35, 35,'PNG', '', '', true, 250, '', false, false, false, false, false, false);
 
         $pdf->SetXY(110, 57);
         $pdf->SetFont('','','11');
@@ -1622,7 +1622,7 @@ class EvaluacionesController extends Controller
       $pdf->SetAutoPageBreak(TRUE, 10);
       $pdf->SetMargins(15, 15, 10);
       $pdf->AddPage();
-      $pdf->Image('storage/cabecera.jpg', 0, 1, 215, 30, 'JPG', '', '', true, 250, '', false, false, false, false, false, false);
+      $pdf->Image('img/cabecera.jpg', 0, 1, 215, 30, 'JPG', '', '', true, 250, '', false, false, false, false, false, false);
       $paciente=Paciente::where('id','=',$id)->get();
 
       $pdf->SetFont('','B','9');
@@ -1867,7 +1867,7 @@ class EvaluacionesController extends Controller
         $pdf->SetAutoPageBreak(TRUE, 10);
         $pdf->SetMargins(15, 15, 10);
         $pdf->AddPage();
-        $pdf->Image('storage/cabecera.jpg', 0, 1, 215, 30, 'JPG', '', '', true, 250, '', false, false, false, false, false, false);
+        $pdf->Image('img/cabecera.jpg', 0, 1, 215, 30, 'JPG', '', '', true, 250, '', false, false, false, false, false, false);
         $pdf->Line ( 20, 50,55,50,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
         $pdf->Line ( 60, 50,95,50,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
         $pdf->Line ( 105, 50,155,50,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
@@ -1902,7 +1902,7 @@ class EvaluacionesController extends Controller
         $date = \Carbon\Carbon::createFromDate($edad,$edad2,$edad3)->age;
         $pdf->Write(0,$date,'','',false);
         $pacientes= Paciente::find($id);
-        $pdf->Image('storage/'.\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$medica->FEC_MED)->format('d-m-Y').'-'.preg_replace('[\s+]','',$pacientes->CI_PAC).'.jpg', 170, 40, 35, 35, 'PNG', '', '', true, 250, '', false, false, false, false, false, false);
+        $pdf->Image('img/'.\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$medica->FEC_MED)->format('d-m-Y').'-'.preg_replace('[\s+]','',$pacientes->CI_PAC).'.jpg', 170, 40, 35, 35, 'PNG', '', '', true, 250, '', false, false, false, false, false, false);
         $pdf->SetXY(110, 57);
         $pdf->SetFont('','','11');
         $pdf->Write(0,$medica->LUG_MED.'   '.\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$medica->FEC_MED)->format('d-m-Y'),'','',false);
@@ -2194,7 +2194,7 @@ class EvaluacionesController extends Controller
         $pdf->Write(0,'Cuello:','','',false);
         $pdf->write2DBarcode ( 'Paciente :'.$paciente[0]->NOM_PAC.' '.$paciente[0]->APA_PAC.' '.$paciente[0]->AMA_PAC.' | Medico: '.Auth::user()->NOM_USU.' '.Auth::user()->APA_USU.' '.Auth::user()->AMA_USU.' | Fecha:'.Carbon::now().' | DARSALUD | Ev. '.$medica->id, 'QRCODE,M', 185, 245, 20, 20, '','','');
         $pdf->AddPage();
-        $pdf->Image('storage/cabecera.jpg', 0, 1, 215, 30, 'JPG', '', '', true, 250, '', false, false, false, false, false, false);
+        $pdf->Image('img/cabecera.jpg', 0, 1, 215, 30, 'JPG', '', '', true, 250, '', false, false, false, false, false, false);
         $pdf->SetFont('','','8');
         $pdf->SetXY(65, 50);
         $pdf->Write(0,$medica->EOE_MED,'','',false);
@@ -2406,7 +2406,6 @@ class EvaluacionesController extends Controller
         $pdf->Output('EvaluacionMedica.pdf');
     }
      public function pdfreceta(Request $request,$id)
-
     {
       $receta=new Receta;
       $receta->DES_REC=$request->input('rec_med');
