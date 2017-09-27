@@ -310,30 +310,7 @@ table.dataTable td {
   *zoom: 1;
   zoom: 1;
 }
-@media screen and (min-width: 1300px) {
-.dataTables_wrapper {
- 
-  zoom: 1;
-}
-}
-@media screen and (max-width: 1300px) {
-.dataTables_wrapper {
- 
-  zoom: 0.8;
-}
-}
-@media screen and (max-width: 1000px) {
-.dataTables_wrapper {
- 
-  zoom: 0.7;
-}
-}
-@media screen and (max-width: 600px) {
-.dataTables_wrapper {
- 
-  zoom: 0.5;
-}
-}
+
 .dataTables_wrapper .dataTables_length {
   float: left;
 }

@@ -30,6 +30,7 @@ Route::post('modificarticket','PacientesController@mticket');
 Route::post('modificarticket2','PacientesController@mticket2');
 Route::post('reservaticket','PacientesController@reservaticket');
 
+Route::get('repmedicos','AdminController@repmedicos');
 
 Route::post('registrarproducto','PacientesController@producto');
 Route::post('modificarproducto','PacientesController@modificarproducto');
@@ -42,6 +43,20 @@ Route::post('ausente','PacientesController@ausente');
 Route::get('adminpaciente','PacientesController@adminpacientes');
 Route::get('informemedicos','PacientesController@informemedico');
 Route::post('pacientes/{id}/cargarlaboratorios','ClientesController@laboratorios');
+
+Route::get('reportedmedico/{id}','PdfController@dmedica');
+Route::get('reportemmedico/{id}','PdfController@mmedica');
+Route::get('reportetmedico/{id}','PdfController@tmedica');
+Route::get('reportedpsicologia/{id}','PdfController@dpsicologia');
+Route::get('reportempsicologia/{id}','PdfController@mpsicologia');
+Route::get('reportetpsicologia/{id}','PdfController@tpsicologia');
+Route::get('reportedoftalmo/{id}','PdfController@doftalmo');
+Route::get('reportemoftalmo/{id}','PdfController@moftalmo');
+Route::get('reportetoftalmo/{id}','PdfController@toftalmo');
+Route::get('reportedexterna/{id}','PdfController@dexterna');
+Route::get('reportemexterna/{id}','PdfController@mexterna');
+Route::get('reportetexterna/{id}','PdfController@texterna');
+
 
 Route::get('{id}/evaluacionpsicologica/{ids}','PacientesController@psicologica');
 Route::get('{id}/evaluacionmedica/{ids}','PacientesController@medica');

@@ -99,6 +99,10 @@ class PdfController extends Controller
 
     }
 
+    public function dmedica($id)
+    {
+      
+    }
     /**
      * Show the form for creating a new resource.
      *

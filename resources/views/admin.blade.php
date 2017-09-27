@@ -23,6 +23,21 @@
     $('#example').DataTable();
 } );
         </script>
+<script type="text/javascript" language="javascript" class="init">
+            $(document).ready(function() {
+    $('#example2').DataTable();
+} );
+        </script>
+<script type="text/javascript" language="javascript" class="init">
+            $(document).ready(function() {
+    $('#example3').DataTable();
+} );
+        </script>
+<script type="text/javascript" language="javascript" class="init">
+            $(document).ready(function() {
+    $('#example4').DataTable();
+} );
+        </script>
 </head>
 <body style="background-image:url({{ asset('img/fondo.jpg') }});">
 
@@ -72,7 +87,7 @@
                     <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-usd fa-stack-1x "></i></span>Reporte de ventas</a>
                 </li>
                 <li>
-                    <a href="informemedicos"><span class="fa-stack fa-lg pull-left"><i class="fa fa-info fa-stack-1x "></i></span>Informe por medicos</a>
+                    <a href="{{url('repmedicos')}}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-info fa-stack-1x "></i></span>Informe por medicos</a>
                 </li>
                 <li>
                     <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-folder-open-o fa-stack-1x "></i></span>Informe por evaluaciones</a>
