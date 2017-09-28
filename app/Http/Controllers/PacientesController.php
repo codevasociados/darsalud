@@ -468,6 +468,13 @@ class PacientesController extends Controller
 
         }
     }
+    public function externa($id, $ids)
+    {   $paciente= Paciente::find($id);
+        $tickets= Ticket::find($ids);
+          $tickets->EST_TIC=1;
+          $tickets->save();
+          return view('consultaext')->with('paciente',$paciente)->with('id',$id)->with('ids',$ids);
+    }
 
 
     public function medica($id, $ids)

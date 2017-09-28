@@ -12,10 +12,9 @@
       <link href="font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
     {!! Html::style('assets/css/sidebar.css') !!}
     {!! Html::script('assets/js/ajax.js')!!}
-    {!! Html::script('assets/js/sidebar2.js')!!}
 {!! Html::script('js/table/jquery.dataTables.js')!!}
     {!! Html::script('assets/js/bootstrap.js')!!}
-    <link href="https://fonts.googleapis.com/css?family=Alef|Arsenal|Didact+Gothic|Fauna+One|Gudea|Julius+Sans+One|Poiret+One|Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alef|Roboto" rel="stylesheet">
 
 </head>
 <body style="background-color:#EFEEEE">
