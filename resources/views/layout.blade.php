@@ -9,6 +9,7 @@
 	<title>Dar salud - SISTEMA INFORMATICO MEDICO</title>
 	{!! Html::style('assets/css/bootstrap.css') !!}
     {!! Html::style('css/table/jquery.dataTables.css')!!}
+    <link href="https://fonts.googleapis.com/css?family=Alef|Arsenal|Didact+Gothic|Fauna+One|Gudea|Julius+Sans+One|Poiret+One|Roboto" rel="stylesheet">
       <link href="font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
     {!! Html::style('assets/css/sidebar.css') !!}
     {!! Html::script('assets/js/ajax.js')!!}
@@ -132,7 +133,7 @@ $(function(){
         <div id="page-content-wrapper">
             <div class="container-fluid xyz">
                 <div class="row">
-                    <div class="col-lg-12" style="overflow:auto;">
+                    <div class="col-lg-12" style="overflow:auto; padding:30px;">
                         @yield('contenido')
                     </div>
                 </div>

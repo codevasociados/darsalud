@@ -31,6 +31,8 @@ Route::post('modificarticket2','PacientesController@mticket2');
 Route::post('reservaticket','PacientesController@reservaticket');
 
 Route::get('repmedicos','AdminController@repmedicos');
+Route::get('repventas','AdminController@repventas');
+Route::get('repevaluacion','AdminController@repevaluacion');
 
 Route::post('registrarproducto','PacientesController@producto');
 Route::post('modificarproducto','PacientesController@modificarproducto');
@@ -47,6 +49,8 @@ Route::post('pacientes/{id}/cargarlaboratorios','ClientesController@laboratorios
 Route::get('reportedmedico/{id}','PdfController@dmedica');
 Route::get('reportemmedico/{id}','PdfController@mmedica');
 Route::get('reportetmedico/{id}','PdfController@tmedica');
+Route::get('reportetgmedico/{id}','PdfController@tgmedica');
+Route::get('reportetgmmedico/{id}','PdfController@tgmmedica');
 Route::get('reportedpsicologia/{id}','PdfController@dpsicologia');
 Route::get('reportempsicologia/{id}','PdfController@mpsicologia');
 Route::get('reportetpsicologia/{id}','PdfController@tpsicologia');
@@ -57,6 +61,11 @@ Route::get('reportedexterna/{id}','PdfController@dexterna');
 Route::get('reportemexterna/{id}','PdfController@mexterna');
 Route::get('reportetexterna/{id}','PdfController@texterna');
 
+Route::get('reportedeva/{id}','PdfController@deva');
+Route::get('reportemeva/{id}','PdfController@meva');
+Route::get('reporteteva/{id}','PdfController@teva');
+Route::get('reportetgeva','PdfController@tgeva');
+Route::post('reportepersonalizado','PdfController@personalizado');
 
 Route::get('{id}/evaluacionpsicologica/{ids}','PacientesController@psicologica');
 Route::get('{id}/evaluacionmedica/{ids}','PacientesController@medica');

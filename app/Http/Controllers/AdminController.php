@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Darsalud\Http\Requests;
 use Darsalud\Http\Controllers\Controller;
 use Darsalud\User;
+use Darsalud\Especialidad;
 
 class AdminController extends Controller
 {
@@ -24,6 +25,17 @@ class AdminController extends Controller
     {
       $user= User::where('NIV_USU','=',2)->get();
       return view('administrador.repmedicos')->with('usuario',$user);
+    }
+    public function repventas()
+    {
+      $user= User::where('NIV_USU','=',2)->get();
+      return view('administrador.repventas')->with('usuario',$user);
+    }
+    public function repevaluacion()
+    {
+      $user= User::where('NIV_USU','=',2)->get();
+      $especialidad= Especialidad::get();
+      return view('administrador.repevaluacion')->with('usuario',$user)->with('especialidad',$especialidad);
     }
     /**
      * Show the form for creating a new resource.
