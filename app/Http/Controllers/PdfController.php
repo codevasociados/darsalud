@@ -1644,43 +1644,97 @@ class PdfController extends Controller
         $html=$html.'</table>';
         break;
         case '5':
-      
-        break;
-        case '6':
+        $user = User::find($request->input('id'));
+        $res1= $res1->where('ID_MED',$request->input('id'))->where('EVA_TIC','!=','Consulta externa')->get();
+        $pdf->SetFont('','B','11');
+        $pdf->SetXY(15, 35);
+        $pdf->Write(0,'Medico:','','',false);
+        $pdf->SetFont('','','11');
+        $pdf->SetXY(35, 35);
+        $pdf->Write(0,$user->NOM_USU.' '.$user->APA_USU.' '.$user->AMA_USU.' ','','',false);
+        $pdf->SetFont('','B','11');
+        $pdf->SetXY(125, 35);
+        $pdf->Write(0,'Fecha:','','',false);
+        $pdf->SetFont('','','11');
+        $pdf->SetXY(140, 35);
+        $pdf->Write(0,Carbon::now()->format('d/m/Y'),'','',false);
+        $pdf->SetFont('','B','11');
+        $pdf->SetXY(15, 40);
+        $pdf->Write(0,'Especialidad:','','',false);
+        $pdf->SetFont('','','11');
+        $pdf->SetXY(45, 40);
+        $pdf->Write(0,$user->ARE_USU,'','',false);
+        $pdf->SetXY(15, 50);
         $html='
         <table class="table table-hover" border="1" cellpadding="4">
         <tr>
-        <td><b>Medico</b></td>
         <td><b>Paciente</b></td>
         <td><b>Especialidad</b></td>
         <td><b>Fecha y hora</b></td>
-        <td><b>Precio</b></td>
         </tr>';
         if(count($res1)>0):
         foreach ($res1 as $r) {
           $html=$html.'
           <tr>
-          <td>'.$r->NOM_USU.' '.$r->APA_USU.' '.$r->AMA_USU.' '.'</td>
           <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
           <td>'.$r->EVA_TIC.'</td>
           <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
-          <td>';
-          if ($r->EVA_TIC=='Evaluacion medica') {
-            $html=$html.' 50 Bs.';
-          }elseif($r->EVA_TIC=='Evaluacion psicologica'){
-            $html=$html.' 30 Bs.';
-          }elseif($r->EVA_TIC=='Evaluacion oftalmologica'){
-            $html=$html.' 30 Bs.';
-          }elseif($r->EVA_TIC=='Consulta externa'){
-            $html=$html.' 50 Bs.';
-          }
-          $html=$html.'</td>
           </tr>';
         }
       else:
         $html=$html.'
         <tr>
-        <td colspan="5" >
+        <td colspan="3" >
+        <center>
+        No hay registros recientes
+        </center>
+        </td>
+        </tr>';
+      endif;
+        $html=$html.'</table>';
+        break;
+        case '6':
+        $user = User::find($request->input('id'));
+        $res1= $res1->where('ID_MED',$request->input('id'))->where('EVA_TIC','=','Consulta externa')->get();
+        $pdf->SetFont('','B','11');
+        $pdf->SetXY(15, 35);
+        $pdf->Write(0,'Medico:','','',false);
+        $pdf->SetFont('','','11');
+        $pdf->SetXY(35, 35);
+        $pdf->Write(0,$user->NOM_USU.' '.$user->APA_USU.' '.$user->AMA_USU.' ','','',false);
+        $pdf->SetFont('','B','11');
+        $pdf->SetXY(125, 35);
+        $pdf->Write(0,'Fecha:','','',false);
+        $pdf->SetFont('','','11');
+        $pdf->SetXY(140, 35);
+        $pdf->Write(0,Carbon::now()->format('d/m/Y'),'','',false);
+        $pdf->SetFont('','B','11');
+        $pdf->SetXY(15, 40);
+        $pdf->Write(0,'Especialidad:','','',false);
+        $pdf->SetFont('','','11');
+        $pdf->SetXY(45, 40);
+        $pdf->Write(0,$user->ARE_USU,'','',false);
+        $pdf->SetXY(15, 50);
+        $html='
+        <table class="table table-hover" border="1" cellpadding="4">
+        <tr>
+        <td><b>Paciente</b></td>
+        <td><b>Especialidad</b></td>
+        <td><b>Fecha y hora</b></td>
+        </tr>';
+        if(count($res1)>0):
+        foreach ($res1 as $r) {
+          $html=$html.'
+          <tr>
+          <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
+          <td>'.$r->EVA_TIC.'</td>
+          <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+          </tr>';
+        }
+      else:
+        $html=$html.'
+        <tr>
+        <td colspan="3" >
         <center>
         No hay registros recientes
         </center>

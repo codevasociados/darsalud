@@ -146,8 +146,8 @@
                     <option value="2">Solo segip</option>
                     <option value="3">Solo consultas externas</option>
                     <option value="4">Por medicos total</option>
-                    <option value="4">Por medicos solo segip</option>
-                    <option value="4">Por medicos solo consultas externas</option>
+                    <option value="5">Por medicos solo segip</option>
+                    <option value="6">Por medicos solo consultas externas</option>
                   </select>
                 </div>
               </div>

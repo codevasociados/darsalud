@@ -20,6 +20,10 @@ Route::get('pacientessegip',['as'=>'pacientessegip','uses'=>'PacientesController
 Route::get('pacientesdarsalud',['as'=>'pacientesdarsalud','uses'=>'ClientesController@index3']);
 Route::get('facturacion','ClientesController@factura');
 Route::post('registrarpacientes','PacientesController@store');
+Route::post('admregistrarpacientes','PacientesController@admregistrarpacientes');
+Route::post('admregistrarusuarios','AdminController@admregistrarusuarios');
+Route::post('admmodificarpass','AdminController@admmodificarpass');
+Route::post('admeliminarusuario','AdminController@admeliminarusuario');
 Route::get('farmacia',['as'=>'farmacia','uses'=>'ClientesController@farmacia']);
 Route::get('reservas',['as'=>'reservas','uses'=>'ClientesController@reservas']);
 Route::post('consultoriosmed','PacientesController@consultasmed');
@@ -42,7 +46,9 @@ Route::post('salidaproducto','PacientesController@salidaproducto');
 Route::post('reservar','PacientesController@reservar');
 Route::post('atencion','PacientesController@atencion');
 Route::post('ausente','PacientesController@ausente');
-Route::get('adminpaciente','PacientesController@adminpacientes');
+Route::get('adminpaciente',['as'=>'adminpaciente','uses'=>'PacientesController@adminpacientes']);
+Route::get('adminusuarios',['as'=>'adminusuarios','uses'=>'AdminController@adminusuarios']);
+Route::get('adminproductos',['as'=>'adminproductos','uses'=>'AdminController@adminproductos']);
 Route::get('informemedicos','PacientesController@informemedico');
 Route::post('pacientes/{id}/cargarlaboratorios','ClientesController@laboratorios');
 
@@ -75,6 +81,7 @@ Route::get('{id}/evaluacionpsicologica/{ids}/finalizar','PacientesController@fin
 Route::get('{id}/evaluacionotorrinolaringologica/{ids}/finalizar','PacientesController@finalizar');
 Route::get('pacientes/{id}',['as'=>'pacientes/{id}','uses'=>'PacientesController@historial']);
 Route::post('modificarpacientes','PacientesController@modificar');
+Route::post('admmodificarpacientes','PacientesController@admmodificar');
 Route::post('pacientes/{id}/pdfreceta','EvaluacionesController@pdfreceta');
 
 Route::get('pacientes/{id}/recetas','PacientesController@recetas');

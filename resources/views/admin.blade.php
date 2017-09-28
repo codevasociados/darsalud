@@ -74,9 +74,7 @@
                     <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-male fa-stack-1x "></i></span> Administrar contenido <span class="fa-stack fa-lg pull-right"><i class="fa fa-caret-down fa-stack-1x "></i></span></a>
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                       <li><a href="adminpaciente"><span class="fa-stack fa-lg pull-left"><i class="fa fa-edit fa-stack-1x "></i></span>Clientes</a></li>
-                      <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-stethoscope fa-stack-1x "></i></span>Especialidades</a></li>
-                      <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span>Usuarios</a></li>
-                      <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-medkit fa-stack-1x "></i></span>Productos de farmacia</a></li>
+                      <li><a href="adminusuarios"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span>Usuarios</a></li>
 
                     </ul>
                 </li>

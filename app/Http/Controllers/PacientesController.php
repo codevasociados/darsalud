@@ -63,6 +63,23 @@ class PacientesController extends Controller
       return redirect()->route('pacientessegip')->with('mensaje',$mensaje);
 
     }
+    public function admmodificar(Request $request)
+    {
+      $paciente= Paciente::find($request->input('id_pac'));
+      $paciente->NOM_PAC= $request->input('mnom_pac');
+      $paciente->APA_PAC= $request->input('mapa_pac');
+      $paciente->AMA_PAC= $request->input('mama_pac');
+      $paciente->CI_PAC= $request->input('mci_pac').' '.$request->input('mexp_pac');
+      $paciente->FEC_NAC= $request->input('mfec_nac');
+      $paciente->DOM_PAC= $request->input('mdir_pac');
+      $paciente->PRO_PAC= $request->input('mpro_pac');
+      $paciente->REF_PAC= $request->input('mtel_pac');
+      $paciente->SEX_PAC= $request->input('mgen_pac');
+      $paciente->save();
+      $mensaje="Datos de cliente modificados";
+      return redirect()->route('adminpaciente')->with('mensaje',$mensaje);
+
+    }
 
     public function consultasmed()
     {
@@ -134,108 +151,110 @@ class PacientesController extends Controller
     {
         $tickets= Ticket::join('pacientes','pacientes.id','=','ticket.ID_PAC')->where('ID_MED','=',Auth::user()->id)->where('EST_TIC','<=',1)->orderBy('ticket.created_at','ASC')->select('ticket.id','NOM_PAC','CI_PAC','APA_PAC','AMA_PAC','EST_TIC','EVA_TIC','ID_PAC')->get();
 
-      echo ' <div style=" width:25%; height:auto;float:left; padding: 2%; margin-top: 15%;" class="shadow">
-<div style="border: 3px red solid; margin-left: 41%; margin-top: -32%; width: 18%; color:red; font-weight: bolder;  border-radius:100%; font-size: 24px;">2</div>
-    <div style=" margin-top:10%; margin-left: auto; font-size:12px;" class="form-group"><label style="">CI: ';
-    if(count($tickets)>1){
-        echo $tickets[1]->CI_PAC.'</label><br/>
-    <label style="">NOMBRE: '.$tickets[1]->NOM_PAC.'</label>
-    <br/>
-    <label style="">AP. PATERNO:'.$tickets[1]->APA_PAC.'</label>
-    <br/>
-    <label style="">AP. MATERNO: '.$tickets[1]->AMA_PAC.'</label>
-    <br/>
-    <label style="">EVALUACION:'.$tickets[1]->EVA_TIC.'</label>';
-    }else{
-           echo '---</label><br/>
-    <label style="">NOMBRE: ---</label>
-    <br/>
-    <label style="">AP. PATERNO:---</label>
-    <br/>
-    <label style="">AP. MATERNO: ---</label>
-    <br/>
-    <label style="">EVALUACION:---</label>';
-    }
-    echo '</div>
-</div>
-<div style="width:25%; height:auto; float:left; padding: 2%;  margin-left:10%; margin-top: 5%;" class="shadow">
-    <div style="border: 3px red solid; float: none; margin-left: 41%; margin-top: -32%; width: 18%; color:red; font-weight: bolder;  border-radius:100%; font-size: 24px;">1</div>
-    <div style=" margin-top:10%; margin-left: auto; font-size:12px;" class="form-group"><label style="">CI: ';
-    if(count($tickets)>0)
+        echo ' <div style=" width:25%; height:auto;float:left; padding: 2%; margin-top: 15%;" class="shadow">
+        <div style="border: 3px red solid; margin-left: 41%; margin-top: -32%; width: 18%; color:red; font-weight: bolder;  border-radius:100%; font-size: 24px;">2</div>
+        <div style=" margin-top:10%; margin-left: auto; font-size:12px;" class="form-group"><label style="">CI: ';
+          if(count($tickets)>1){
+            echo $tickets[1]->CI_PAC.'</label><br/>
+            <label style="">NOMBRE: '.$tickets[1]->NOM_PAC.'</label>
+            <br/>
+            <label style="">AP. PATERNO:'.$tickets[1]->APA_PAC.'</label>
+            <br/>
+            <label style="">AP. MATERNO: '.$tickets[1]->AMA_PAC.'</label>
+            <br/>
+            <label style="">EVALUACION:'.$tickets[1]->EVA_TIC.'</label>';
+            }else{
+                   echo '---</label><br/>
+            <label style="">NOMBRE: ---</label>
+            <br/>
+            <label style="">AP. PATERNO:---</label>
+            <br/>
+            <label style="">AP. MATERNO: ---</label>
+            <br/>
+            <label style="">EVALUACION:---</label>';
+            }
+          echo '</div>
+          </div>
+          <div style="width:25%; height:auto; float:left; padding: 2%;  margin-left:10%; margin-top: 5%;" class="shadow">
+              <div style="border: 3px red solid; float: none; margin-left: 41%; margin-top: -32%; width: 18%; color:red; font-weight: bolder;  border-radius:100%; font-size: 24px;">1</div>
+              <div style=" margin-top:10%; margin-left: auto; font-size:12px;" class="form-group"><label style="">CI: ';
+          if(count($tickets)>0)
+            {
+             echo   $tickets[0]->CI_PAC.'</label><br/>
+        <label style="">NOMBRE:'.$tickets[0]->NOM_PAC.'</label>
+        <br/>
+        <label style="">AP. PATERNO: '.$tickets[0]->APA_PAC.'</label>
+        <br/>
+        <label style="">AP. MATERNO: '.$tickets[0]->AMA_PAC.'</label>
+        <br/>
+        <label style="">EVALUACION: '.$tickets[0]->EVA_TIC.'</label></div>';
+        if($tickets[0]->EST_TIC ==1){
+            echo '<a  href="';
+        if($tickets[0]->EVA_TIC=='Evaluacion medica' ||$tickets[0]->EVA_TIC=='Evaluacion otorrinolaringologica' || $tickets[0]->EVA_TIC=='Evaluacion psicologica' || $tickets[0]->EVA_TIC=='Evaluacion oftalmologica')
         {
-         echo   $tickets[0]->CI_PAC.'</label><br/>
-    <label style="">NOMBRE:'.$tickets[0]->NOM_PAC.'</label>
-    <br/>
-    <label style="">AP. PATERNO: '.$tickets[0]->APA_PAC.'</label>
-    <br/>
-    <label style="">AP. MATERNO: '.$tickets[0]->AMA_PAC.'</label>
-    <br/>
-    <label style="">EVALUACION: '.$tickets[0]->EVA_TIC.'</label></div>';
-    if($tickets[0]->EST_TIC ==1){
-        echo '<a  href="';
-    if($tickets[0]->EVA_TIC=='Evaluacion medica' ||$tickets[0]->EVA_TIC=='Evaluacion otorrinolaringologica' || $tickets[0]->EVA_TIC=='Evaluacion psicologica' || $tickets[0]->EVA_TIC=='Evaluacion oftalmologica')
-    {
-        $nombre=  preg_replace('[\s+]','', $tickets[0]->EVA_TIC).'/'.$tickets[0]->id;
+            $nombre=  preg_replace('[\s+]','', $tickets[0]->EVA_TIC).'/'.$tickets[0]->id;
 
-        echo $tickets[0]->ID_PAC.'/'.strtolower($nombre);
-    }else
-    {
-        echo 'pacientes/'.$tickets[0]->ID_PAC;
-    }
-    echo '" class="btn btn-warning">ATENDIENDO</a></div>';
-    }else{
-    echo '<a href="';
-    if($tickets[0]->EVA_TIC=='Evaluacion medica' ||$tickets[0]->EVA_TIC=='Evaluacion otorrinolaringologica' || $tickets[0]->EVA_TIC=='Evaluacion psicologica' || $tickets[0]->EVA_TIC=='Evaluacion oftalmologica')
-    {
-        $nombre=  preg_replace('[\s+]','', $tickets[0]->EVA_TIC);
-
-        echo $tickets[0]->ID_PAC.'/'.strtolower($nombre).'/'.$tickets[0]->id;
-    }else
-    {
-        echo 'pacientes/'.$tickets[0]->ID_PAC;
-    }
-    echo '" class="btn btn-primary">ATENDER</a><br/>
-    <br/>
-    <form action="ausente" method="post">
-    <input type="hidden" name="idtic" value="'.$tickets[0]->id.'"></input>
-    <button class="btn btn-danger">AUSENTE</button>
-    </form>
-</div>';}}else{
-      echo  '---</label><br/>
-    <label style="">NOMBRE:---</label>
-    <br/>
-    <label style="">AP. PATERNO: ---</label>
-    <br/>
-    <label style="">AP. MATERNO: ---</label>
-    <br/>
-    <label style="">EVALUACION:---</label></div></div>';
-}
-echo '<div style=" width:25%; height:auto;float:left; padding: 2%; margin-left:10%; margin-top: 15%;" class="shadow">
-    <div style="border: 3px red solid; margin-left: 41%; margin-top: -32%; width: 18%; color:red; font-weight: bolder;  border-radius:100%; font-size: 24px;">3</div>
-    <div style=" margin-top:10%; margin-left: auto; font-size:12px;" class="form-group"><label style="">CI: ';
-    if( count($tickets)>2)
-        {  echo $tickets[2]->CI_PAC.'</label><br/>
-    <label style="">NOMBRE: '.$tickets[2]->NOM_PAC.'</label>
-    <br/>
-    <label style="">AP. PATERNO:'.$tickets[2]->APA_PAC.'</label>
-    <br/>
-    <label style="">AP. MATERNO:'.$tickets[2]->AMA_PAC.'</label>
-    <br/>
-    <label style="">EVALUACION:'.$tickets[2]->EVA_TIC.'</label>';
+            echo $tickets[0]->ID_PAC.'/'.strtolower($nombre);
         }else
         {
-            echo '---</label><br/>
-    <label style="">NOMBRE: ---</label>
-    <br/>
-    <label style="">AP. PATERNO:---</label>
-    <br/>
-    <label style="">AP. MATERNO:---</label>
-    <br/>
-    <label style="">EVALUACION:---</label>';
+            $nombre=  preg_replace('[\s+]','', $tickets[0]->EVA_TIC).'/'.$tickets[0]->id;
+            echo $tickets[0]->ID_PAC.'/'.strtolower($nombre);
         }
-    echo '</div>
-</div>';
+        echo '" class="btn btn-warning">ATENDIENDO</a></div>';
+        }else{
+        echo '<a href="';
+        if($tickets[0]->EVA_TIC=='Evaluacion medica' ||$tickets[0]->EVA_TIC=='Evaluacion otorrinolaringologica' || $tickets[0]->EVA_TIC=='Evaluacion psicologica' || $tickets[0]->EVA_TIC=='Evaluacion oftalmologica')
+        {
+            $nombre=  preg_replace('[\s+]','', $tickets[0]->EVA_TIC);
+
+            echo $tickets[0]->ID_PAC.'/'.strtolower($nombre).'/'.$tickets[0]->id;
+        }else
+        {
+          $nombre=  preg_replace('[\s+]','', $tickets[0]->EVA_TIC).'/'.$tickets[0]->id;
+          echo $tickets[0]->ID_PAC.'/'.strtolower($nombre);
+        }
+        echo '" class="btn btn-primary">ATENDER</a><br/>
+        <br/>
+        <form action="ausente" method="post">
+        <input type="hidden" name="idtic" value="'.$tickets[0]->id.'"></input>
+        <button class="btn btn-danger">AUSENTE</button>
+        </form>
+    </div>';}}else{
+          echo  '---</label><br/>
+        <label style="">NOMBRE:---</label>
+        <br/>
+        <label style="">AP. PATERNO: ---</label>
+        <br/>
+        <label style="">AP. MATERNO: ---</label>
+        <br/>
+        <label style="">EVALUACION:---</label></div></div>';
     }
+    echo '<div style=" width:25%; height:auto;float:left; padding: 2%; margin-left:10%; margin-top: 15%;" class="shadow">
+        <div style="border: 3px red solid; margin-left: 41%; margin-top: -32%; width: 18%; color:red; font-weight: bolder;  border-radius:100%; font-size: 24px;">3</div>
+        <div style=" margin-top:10%; margin-left: auto; font-size:12px;" class="form-group"><label style="">CI: ';
+        if( count($tickets)>2)
+            {  echo $tickets[2]->CI_PAC.'</label><br/>
+        <label style="">NOMBRE: '.$tickets[2]->NOM_PAC.'</label>
+        <br/>
+        <label style="">AP. PATERNO:'.$tickets[2]->APA_PAC.'</label>
+        <br/>
+        <label style="">AP. MATERNO:'.$tickets[2]->AMA_PAC.'</label>
+        <br/>
+        <label style="">EVALUACION:'.$tickets[2]->EVA_TIC.'</label>';
+            }else
+            {
+                echo '---</label><br/>
+        <label style="">NOMBRE: ---</label>
+        <br/>
+        <label style="">AP. PATERNO:---</label>
+        <br/>
+        <label style="">AP. MATERNO:---</label>
+        <br/>
+        <label style="">EVALUACION:---</label>';
+            }
+        echo '</div>
+    </div>';
+        }
 
     public function historial($id)
     {
@@ -641,23 +660,40 @@ echo '<div style=" width:25%; height:auto;float:left; padding: 2%; margin-left:1
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $pacientes = new Paciente;
-        $pacientes->NOM_PAC= $request->input('nom_pac');
-        $pacientes->APA_PAC= $request->input('apa_pac');
-        $pacientes->AMA_PAC= $request->input('ama_pac');
-        $pacientes->CI_PAC= $request->input('ci_pac').' '.$request->input('exp_pac');
-        $pacientes->SEX_PAC= $request->input('gen_pac');
-        $pacientes->FEC_NAC= $request->input('fec_nac');
-        $pacientes->REF_PAC= $request->input('tel_pac');
-        $pacientes->PRO_PAC= $request->input('pro_pac');
-        $pacientes->DOM_PAC= $request->input('dir_pac');
-        $pacientes->ID_USU= Auth::user()->id;
-        $pacientes->save();
-        $mensaje='Usuario registrado correctamente';
-         return redirect()->route('pacientessegip')->with('mensaje',$mensaje);
-    }
+     public function store(Request $request)
+     {
+         $pacientes = new Paciente;
+         $pacientes->NOM_PAC= $request->input('nom_pac');
+         $pacientes->APA_PAC= $request->input('apa_pac');
+         $pacientes->AMA_PAC= $request->input('ama_pac');
+         $pacientes->CI_PAC= $request->input('ci_pac').' '.$request->input('exp_pac');
+         $pacientes->SEX_PAC= $request->input('gen_pac');
+         $pacientes->FEC_NAC= $request->input('fec_nac');
+         $pacientes->REF_PAC= $request->input('tel_pac');
+         $pacientes->PRO_PAC= $request->input('pro_pac');
+         $pacientes->DOM_PAC= $request->input('dir_pac');
+         $pacientes->ID_USU= Auth::user()->id;
+         $pacientes->save();
+         $mensaje='Usuario registrado correctamente';
+          return redirect()->route('pacientessegip')->with('mensaje',$mensaje);
+     }
+     public function admregistrarpacientes(Request $request)
+     {
+         $pacientes = new Paciente;
+         $pacientes->NOM_PAC= $request->input('nom_pac');
+         $pacientes->APA_PAC= $request->input('apa_pac');
+         $pacientes->AMA_PAC= $request->input('ama_pac');
+         $pacientes->CI_PAC= $request->input('ci_pac').' '.$request->input('exp_pac');
+         $pacientes->SEX_PAC= $request->input('gen_pac');
+         $pacientes->FEC_NAC= $request->input('fec_nac');
+         $pacientes->REF_PAC= $request->input('tel_pac');
+         $pacientes->PRO_PAC= $request->input('pro_pac');
+         $pacientes->DOM_PAC= $request->input('dir_pac');
+         $pacientes->ID_USU= Auth::user()->id;
+         $pacientes->save();
+         $mensaje='Cliente registrado correctamente';
+          return redirect()->route('adminpaciente')->with('mensaje',$mensaje);
+     }
 
     public function listapacientes()
     {
