@@ -22,6 +22,7 @@ Route::get('facturacion','ClientesController@factura');
 Route::post('registrarpacientes','PacientesController@store');
 Route::post('admregistrarpacientes','PacientesController@admregistrarpacientes');
 Route::post('admregistrarusuarios','AdminController@admregistrarusuarios');
+Route::post('admmodificarusuarios','AdminController@admmodificarusuarios');
 Route::post('admmodificarpass','AdminController@admmodificarpass');
 Route::post('admeliminarusuario','AdminController@admeliminarusuario');
 Route::get('farmacia',['as'=>'farmacia','uses'=>'ClientesController@farmacia']);
@@ -42,6 +43,8 @@ Route::post('registrarproducto','PacientesController@producto');
 Route::post('modificarproducto','PacientesController@modificarproducto');
 Route::post('entradaproducto','PacientesController@entradaproducto');
 Route::post('salidaproducto','PacientesController@salidaproducto');
+
+Route::get('graficos','AdminController@graficos');
 
 Route::post('reservar','PacientesController@reservar');
 Route::post('atencion','PacientesController@atencion');

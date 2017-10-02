@@ -1105,7 +1105,7 @@ class EvaluacionesController extends Controller
         $date = \Carbon\Carbon::createFromDate($edad,$edad2,$edad3)->age;
         $pdf->Write(0,$date,'','',false);
         $pacientes= Paciente::find($id);
-        $pdf->Image('img/'.Carbon::now()->format('d-m-Y').'-'.preg_replace('[\s+]','',$pacientes->CI_PAC).'.jpg', 170, 40, 35, 35,'PNG', '', '', true, 250, '', false, false, false, false, false, false);
+        $pdf->Image('storage/'.Carbon::now()->format('d-m-Y').'-'.preg_replace('[\s+]','',$pacientes->CI_PAC).'.jpg', 170, 40, 35, 35,'PNG', '', '', true, 250, '', false, false, false, false, false, false);
 
         $pdf->SetXY(110, 57);
         $pdf->SetFont('','','11');
