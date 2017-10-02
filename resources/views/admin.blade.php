@@ -88,7 +88,7 @@
                     <a href="{{url('repevaluacion')}}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-folder-open-o fa-stack-1x "></i></span>Informe por evaluaciones</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-bar-chart-o fa-stack-1x "></i></span>Cuadros estadisticos</a>
+                    <a href="{{url('graficos')}}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-bar-chart-o fa-stack-1x "></i></span>Cuadros estadisticos</a>
                 </li>
             </ul>
         </div><!-- /#sidebar-wrapper -->

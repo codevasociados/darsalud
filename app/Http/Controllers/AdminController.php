@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Darsalud\Http\Requests;
 use Darsalud\Http\Controllers\Controller;
 use Darsalud\User;
+use DB;
+use Darsalud\Ticket;
 use Darsalud\Especialidad;
 
 class AdminController extends Controller
@@ -85,6 +87,29 @@ class AdminController extends Controller
       $usuario->delete();
       $mensaje='Usuario eliminado correctamente';
        return redirect()->route('adminusuarios')->with('mensaje2',$mensaje);
+    }
+    public function graficos(){
+      $medica = Ticket::select(DB::raw("count(*) as count , month(created_at) as mes"))->where('EVA_TIC','=','Evaluacion medica')->groupBy(DB::raw("month(created_at)"))->orderBy(DB::raw("month(created_at)"))
+       ->get()->toArray();
+      $psico = Ticket::select(DB::raw("count(*) as count , month(created_at) as mes"))->orderBy(DB::raw("month(created_at)"))->where('EVA_TIC','=','Evaluacion psicologica')
+       ->groupBy(DB::raw("month(created_at)"))
+       ->get()->toArray();
+      $oftalmo = Ticket::select(DB::raw("count(*) as count , month(created_at) as mes"))->orderBy(DB::raw("month(created_at)"))->where('EVA_TIC','=','Evaluacion oftalmologica')
+       ->groupBy(DB::raw("month(created_at)"))
+       ->get()->toArray();
+      $externa = Ticket::select(DB::raw("count(*) as count , month(created_at) as mes"))->orderBy(DB::raw("month(created_at)"))->where('EVA_TIC','=','Consulta externa')
+       ->groupBy(DB::raw("month(created_at)"))
+       ->get()->toArray();
+      $total = Ticket::select(DB::raw("count(*) as count , month(created_at) as mes, EVA_TIC as eva"))->orderBy(DB::raw("month(created_at)"))
+       ->groupBy(DB::raw("month(created_at)"))
+       ->get()->toArray();
+
+   return view('administrador.graficos')
+           ->with('medica',json_encode($medica,JSON_NUMERIC_CHECK))
+           ->with('psico',json_encode($psico,JSON_NUMERIC_CHECK))
+           ->with('oftalmo',json_encode($oftalmo,JSON_NUMERIC_CHECK))
+           ->with('externa',json_encode($externa,JSON_NUMERIC_CHECK))
+           ->with('total',json_encode($total,JSON_NUMERIC_CHECK));
     }
     /**
      * Show the form for creating a new resource.
