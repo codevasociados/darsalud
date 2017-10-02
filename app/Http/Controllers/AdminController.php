@@ -103,13 +103,17 @@ class AdminController extends Controller
       $total = Ticket::select(DB::raw("count(*) as count , month(created_at) as mes, EVA_TIC as eva"))->orderBy(DB::raw("month(created_at)"))
        ->groupBy(DB::raw("month(created_at)"))
        ->get()->toArray();
+      $total2 = Ticket::select(DB::raw("count(*) as count , month(created_at) as mes, EVA_TIC as eva"))->orderBy(DB::raw("month(created_at)"))->orderBy(DB::raw("eva_tic"))
+       ->groupBy(DB::raw("month(created_at)"))->groupBy(DB::raw("eva_tic"))
+       ->get()->toArray();
 
    return view('administrador.graficos')
            ->with('medica',json_encode($medica,JSON_NUMERIC_CHECK))
            ->with('psico',json_encode($psico,JSON_NUMERIC_CHECK))
            ->with('oftalmo',json_encode($oftalmo,JSON_NUMERIC_CHECK))
            ->with('externa',json_encode($externa,JSON_NUMERIC_CHECK))
-           ->with('total',json_encode($total,JSON_NUMERIC_CHECK));
+           ->with('total',json_encode($total,JSON_NUMERIC_CHECK))
+           ->with('total2',json_encode($total2,JSON_NUMERIC_CHECK));
     }
     /**
      * Show the form for creating a new resource.

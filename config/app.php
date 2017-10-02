@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -95,7 +95,7 @@ return [
     |
     */
 
-    'log' => 'single',
+    'log' => 'errorlog',
 
     /*
     |--------------------------------------------------------------------------
@@ -149,7 +149,7 @@ return [
         Darsalud\Providers\RouteServiceProvider::class,
         Darsalud\Providers\RouteServiceProvider::class,
         Kim\Activity\ActivityServiceProvider::class,
-       
+
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],

@@ -107,8 +107,8 @@ class PdfController extends Controller
     public function dmedica($id)
     {
       $user = User::find($id);
-      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->get();
-      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
+      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->get();
+      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE');
@@ -157,7 +157,7 @@ class PdfController extends Controller
         <tr>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         </tr>';
       }
     else:
@@ -182,11 +182,11 @@ class PdfController extends Controller
     public function tgmedica($id)
     {
       $user = User::find($id);
-      $res1=Ticket::where('ID_MED','=',$user->id)->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->get();
-      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
-      $res3=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
-      $res4=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
-      $res5=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
+      $res1=Ticket::where('ID_MED','=',$user->id)->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->get();
+      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
+      $res3=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
+      $res4=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
+      $res5=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE');
@@ -235,7 +235,7 @@ class PdfController extends Controller
         <tr>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         </tr>';
       }
     else:
@@ -260,11 +260,11 @@ class PdfController extends Controller
     public function tgmmedica($id)
     {
       $user = User::find($id);
-      $res1=Ticket::where('ID_MED','=',$user->id)->join('users','ticket.ID_MED','=','users.id')->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE())')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->get();
-      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->join('users','ticket.ID_MED','=','users.id')->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE())')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
-      $res3=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->join('users','ticket.ID_MED','=','users.id')->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE())')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
-      $res4=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->join('users','ticket.ID_MED','=','users.id')->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE())')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
-      $res5=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->join('users','ticket.ID_MED','=','users.id')->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE())')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
+      $res1=Ticket::where('ID_MED','=',$user->id)->join('users','ticket.ID_MED','=','users.id')->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE())')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->get();
+      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->join('users','ticket.ID_MED','=','users.id')->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE())')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
+      $res3=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->join('users','ticket.ID_MED','=','users.id')->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE())')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
+      $res4=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->join('users','ticket.ID_MED','=','users.id')->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE())')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
+      $res5=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->join('users','ticket.ID_MED','=','users.id')->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE())')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE');
@@ -313,7 +313,7 @@ class PdfController extends Controller
         <tr>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         </tr>';
       }
     else:
@@ -338,8 +338,8 @@ class PdfController extends Controller
     public function mmedica($id)
     {
       $user = User::find($id);
-      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE())')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->get();
-      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE())')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
+      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE())')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->get();
+      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE())')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE');
@@ -388,7 +388,7 @@ class PdfController extends Controller
         <tr>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         </tr>';
       }
     else:
@@ -413,8 +413,8 @@ class PdfController extends Controller
     public function tmedica($id)
     {
       $user = User::find($id);
-      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->get();
-      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
+      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->get();
+      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion medica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE');
@@ -463,7 +463,7 @@ class PdfController extends Controller
         <tr>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         </tr>';
       }
     else:
@@ -488,8 +488,8 @@ class PdfController extends Controller
     public function dpsicologia($id)
     {
       $user = User::find($id);
-      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->get();
-      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
+      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->get();
+      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE');
@@ -538,7 +538,7 @@ class PdfController extends Controller
         <tr>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         </tr>';
       }
     else:
@@ -563,8 +563,8 @@ class PdfController extends Controller
     public function mpsicologia($id)
     {
       $user = User::find($id);
-      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->get();
-      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
+      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->get();
+      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE');
@@ -613,7 +613,7 @@ class PdfController extends Controller
         <tr>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         </tr>';
       }
     else:
@@ -638,8 +638,8 @@ class PdfController extends Controller
     public function tpsicologia($id)
     {
       $user = User::find($id);
-      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->get();
-      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
+      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->get();
+      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion psicologica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE');
@@ -688,7 +688,7 @@ class PdfController extends Controller
         <tr>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         </tr>';
       }
     else:
@@ -713,8 +713,8 @@ class PdfController extends Controller
     public function doftalmo($id)
     {
       $user = User::find($id);
-      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->get();
-      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
+      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->get();
+      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE');
@@ -763,7 +763,7 @@ class PdfController extends Controller
         <tr>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         </tr>';
       }
     else:
@@ -788,8 +788,8 @@ class PdfController extends Controller
     public function moftalmo($id)
     {
       $user = User::find($id);
-      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->get();
-      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
+      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->get();
+      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE');
@@ -838,7 +838,7 @@ class PdfController extends Controller
         <tr>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         </tr>';
       }
     else:
@@ -863,8 +863,8 @@ class PdfController extends Controller
     public function toftalmo($id)
     {
       $user = User::find($id);
-      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->get();
-      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
+      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->get();
+      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Evaluacion oftalmologica')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE');
@@ -913,7 +913,7 @@ class PdfController extends Controller
         <tr>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         </tr>';
       }
     else:
@@ -938,8 +938,8 @@ class PdfController extends Controller
     public function dexterna($id)
     {
       $user = User::find($id);
-      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->get();
-      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
+      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->get();
+      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE');
@@ -988,7 +988,7 @@ class PdfController extends Controller
         <tr>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         </tr>';
       }
     else:
@@ -1013,8 +1013,8 @@ class PdfController extends Controller
     public function mexterna($id)
     {
       $user = User::find($id);
-      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->get();
-      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
+      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->get();
+      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE');
@@ -1063,7 +1063,7 @@ class PdfController extends Controller
         <tr>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         </tr>';
       }
     else:
@@ -1088,8 +1088,8 @@ class PdfController extends Controller
     public function texterna($id)
     {
       $user = User::find($id);
-      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->get();
-      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.updated_at')->count();
+      $res1=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->get();
+      $res2=Ticket::where('ID_MED','=',$user->id)->where('EVA_TIC','=','Consulta externa')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE');
@@ -1138,7 +1138,7 @@ class PdfController extends Controller
         <tr>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         </tr>';
       }
     else:
@@ -1165,8 +1165,8 @@ class PdfController extends Controller
     public function deva($id)
     {
       $esp = Especialidad::find($id);
-      $res1=Ticket::where('EVA_TIC','=',$esp->NOM_ESP)->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at')->get();
-      $res2=Ticket::where('EVA_TIC','=',$esp->NOM_ESP)->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at')->count();
+      $res1=Ticket::where('EVA_TIC','=',$esp->NOM_ESP)->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at')->get();
+      $res2=Ticket::where('EVA_TIC','=',$esp->NOM_ESP)->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE EVALUACIONES');
@@ -1201,7 +1201,7 @@ class PdfController extends Controller
         <td>'.$r->NOM_USU.' '.$r->APA_USU.' '.$r->AMA_USU.' '.'</td>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         <td> 50 Bs.</td>
         </tr>';
       }
@@ -1227,8 +1227,8 @@ class PdfController extends Controller
     public function meva($id)
     {
       $esp = Especialidad::find($id);
-      $res1=Ticket::where('EVA_TIC','=',$esp->NOM_ESP)->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at')->get();
-      $res2=Ticket::where('EVA_TIC','=',$esp->NOM_ESP)->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at')->count();
+      $res1=Ticket::where('EVA_TIC','=',$esp->NOM_ESP)->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at')->get();
+      $res2=Ticket::where('EVA_TIC','=',$esp->NOM_ESP)->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE)')->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE EVALUACIONES');
@@ -1263,7 +1263,7 @@ class PdfController extends Controller
         <td>'.$r->NOM_USU.' '.$r->APA_USU.' '.$r->AMA_USU.' '.'</td>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         <td> 50 Bs.</td>
         </tr>';
       }
@@ -1289,8 +1289,8 @@ class PdfController extends Controller
     public function teva($id)
     {
       $esp = Especialidad::find($id);
-      $res1=Ticket::where('EVA_TIC','=',$esp->NOM_ESP)->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at')->get();
-      $res2=Ticket::where('EVA_TIC','=',$esp->NOM_ESP)->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at')->count();
+      $res1=Ticket::where('EVA_TIC','=',$esp->NOM_ESP)->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at')->get();
+      $res2=Ticket::where('EVA_TIC','=',$esp->NOM_ESP)->join('users','ticket.ID_MED','=','users.id')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE EVALUACIONES');
@@ -1325,7 +1325,7 @@ class PdfController extends Controller
         <td>'.$r->NOM_USU.' '.$r->APA_USU.' '.$r->AMA_USU.' '.'</td>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         <td> 50 Bs.</td>
         </tr>';
       }
@@ -1350,11 +1350,11 @@ class PdfController extends Controller
     }
     public function tgeva()
     {
-      $res1=Ticket::join('users','ticket.ID_MED','=','users.id')->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at')->get();
-      $res2=Ticket::where('EVA_TIC','=','Evaluacion medica')->join('users','ticket.ID_MED','=','users.id')->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at')->count();
-      $res3=Ticket::where('EVA_TIC','=','Evaluacion psicologica')->join('users','ticket.ID_MED','=','users.id')->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at')->count();
-      $res4=Ticket::where('EVA_TIC','=','Evaluacion oftalmologica')->join('users','ticket.ID_MED','=','users.id')->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at')->count();
-      $res5=Ticket::where('EVA_TIC','=','Consulta externa')->join('users','ticket.ID_MED','=','users.id')->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at')->count();
+      $res1=Ticket::join('users','ticket.ID_MED','=','users.id')->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at')->get();
+      $res2=Ticket::where('EVA_TIC','=','Evaluacion medica')->join('users','ticket.ID_MED','=','users.id')->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at')->count();
+      $res3=Ticket::where('EVA_TIC','=','Evaluacion psicologica')->join('users','ticket.ID_MED','=','users.id')->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at')->count();
+      $res4=Ticket::where('EVA_TIC','=','Evaluacion oftalmologica')->join('users','ticket.ID_MED','=','users.id')->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at')->count();
+      $res5=Ticket::where('EVA_TIC','=','Consulta externa')->join('users','ticket.ID_MED','=','users.id')->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at')->count();
       $pagelayout = array('165', '216');
       $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
       $pdf->SetTitle('REPORTE EVALUACIONES');
@@ -1389,7 +1389,7 @@ class PdfController extends Controller
         <td>'.$r->NOM_USU.' '.$r->APA_USU.' '.$r->AMA_USU.' '.'</td>
         <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
         <td>'.$r->EVA_TIC.'</td>
-        <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+        <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
         <td>';
         if ($r->EVA_TIC=='Evaluacion medica') {
           $html=$html.' 50 Bs.';
@@ -1445,19 +1445,19 @@ class PdfController extends Controller
 
       switch($request->opcion){
         case '1':
-        $res1=Ticket::join('users','ticket.ID_MED','=','users.id')->whereRaw('DATE(ticket.updated_at) = subdate(CURRENT_DATE, 1)')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at');
+        $res1=Ticket::join('users','ticket.ID_MED','=','users.id')->whereRaw('DATE(ticket.created_at) = subdate(CURRENT_DATE, 1)')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at');
         break;
         case '2':
-        $res1=Ticket::join('users','ticket.ID_MED','=','users.id')->whereRaw('DATE(ticket.updated_at) = CURRENT_DATE')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at');
+        $res1=Ticket::join('users','ticket.ID_MED','=','users.id')->whereRaw('DATE(ticket.created_at) = CURRENT_DATE')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at');
         break;
         case '3':
-        $res1=Ticket::join('users','ticket.ID_MED','=','users.id')->whereRaw('MONTH(ticket.updated_at) = MONTH(CURRENT_DATE)')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at');
+        $res1=Ticket::join('users','ticket.ID_MED','=','users.id')->whereRaw('MONTH(ticket.created_at) = MONTH(CURRENT_DATE)')->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at');
         break;
         case '4':
-        $res1=Ticket::join('users','ticket.ID_MED','=','users.id')->whereDate('ticket.updated_at','=',$request->input('fija'))->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at');
+        $res1=Ticket::join('users','ticket.ID_MED','=','users.id')->whereDate('ticket.created_at','=',$request->input('fija'))->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at');
         break;
         case '5':
-        $res1=Ticket::join('users','ticket.ID_MED','=','users.id')->whereBetween('ticket.updated_at',array($request->input('inicio'),$request->input('fin')))->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.updated_at');
+        $res1=Ticket::join('users','ticket.ID_MED','=','users.id')->whereBetween('ticket.created_at',array($request->input('inicio'),$request->input('fin')))->join('pacientes','ticket.ID_PAC','=','pacientes.id')->select('NOM_PAC','APA_PAC','AMA_PAC','EVA_TIC','NOM_USU','APA_USU','AMA_USU','ticket.created_at');
         break;
       }
       switch($request->tabla){
@@ -1479,7 +1479,7 @@ class PdfController extends Controller
           <td>'.$r->NOM_USU.' '.$r->APA_USU.' '.$r->AMA_USU.' '.'</td>
           <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
           <td>'.$r->EVA_TIC.'</td>
-          <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+          <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
           <td>';
           if ($r->EVA_TIC=='Evaluacion medica') {
             $html=$html.' 50 Bs.';
@@ -1523,7 +1523,7 @@ class PdfController extends Controller
           <td>'.$r->NOM_USU.' '.$r->APA_USU.' '.$r->AMA_USU.' '.'</td>
           <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
           <td>'.$r->EVA_TIC.'</td>
-          <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+          <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
           <td>';
           if ($r->EVA_TIC=='Evaluacion medica') {
             $html=$html.' 50 Bs.';
@@ -1567,7 +1567,7 @@ class PdfController extends Controller
           <td>'.$r->NOM_USU.' '.$r->APA_USU.' '.$r->AMA_USU.' '.'</td>
           <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
           <td>'.$r->EVA_TIC.'</td>
-          <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+          <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
           <td>';
           if ($r->EVA_TIC=='Evaluacion medica') {
             $html=$html.' 50 Bs.';
@@ -1628,7 +1628,7 @@ class PdfController extends Controller
           <tr>
           <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
           <td>'.$r->EVA_TIC.'</td>
-          <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+          <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
           </tr>';
         }
       else:
@@ -1678,7 +1678,7 @@ class PdfController extends Controller
           <tr>
           <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
           <td>'.$r->EVA_TIC.'</td>
-          <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+          <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
           </tr>';
         }
       else:
@@ -1728,7 +1728,7 @@ class PdfController extends Controller
           <tr>
           <td>'.$r->NOM_PAC.' '.$r->APA_PAC.' '.$r->AMA_PAC.' '.'</td>
           <td>'.$r->EVA_TIC.'</td>
-          <td>'.$r->updated_at->format('d/m/Y H:m:s').'</td>
+          <td>'.$r->created_at->format('d/m/Y H:i:s').'</td>
           </tr>';
         }
       else:

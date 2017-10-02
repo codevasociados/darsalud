@@ -109,9 +109,9 @@
               <div class="col-lg-4">
                     <select class="form-control" name="niv_usu" id="niv_usu">
                       <option value="">SELECCIONE</option>
-                      <option value="1">Cuenta de recepcion</option>
+                      <option value="3">Cuenta de recepcion</option>
                       <option value="2">Cuenta para el personal medico</option>
-                      <option value="3">Super usuario - Administrador</option>
+                      <option value="1">Super usuario - Administrador</option>
                     </select>
               </div>
               </div>
@@ -162,9 +162,9 @@
     </div>
   </div>
 
-    <div class = "modal fade " id = "myModal2" tabindex = "-1" role = "dialog"
+    <div class = "modal fade  " id = "myModal2" tabindex = "-1" role = "dialog"
        aria-labelledby = "myModalLabel" aria-hidden = "true" >
-       <div class = "modal-dialog">
+       <div class = "modal-dialog modal-lg">
           <div class = "modal-content">
              <div class = "modal-header">
                 <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
@@ -213,9 +213,9 @@
                 <div class="col-lg-4">
                       <select class="form-control" name="niv_usu" id="mniv_usu">
                         <option value="">SELECCIONE</option>
-                        <option value="1">Cuenta de recepcion</option>
+                        <option value="3">Cuenta de recepcion</option>
                         <option value="2">Cuenta para el personal medico</option>
-                        <option value="3">Super usuario - Administrador</option>
+                        <option value="1">Super usuario - Administrador</option>
                       </select>
                 </div>
                 </div>

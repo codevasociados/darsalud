@@ -10,11 +10,13 @@
         var data_oftalmo = <?php echo $oftalmo; ?>;
         var data_externa = <?php echo $externa; ?>;
         var data_total = <?php echo $total; ?>;
+        var data_total2 = <?php echo $total2; ?>;
         console.log(data_medica);
         console.log(data_psico);
         console.log(data_oftalmo);
         console.log(data_externa);
         console.log(data_total);
+        console.log(data_total2);
     $('#container').highcharts({
         chart: {
             type: 'column'
@@ -258,32 +260,32 @@
         data: (function(){
                 var data= [];
                 for(var j= 0; j< 12; j++){
-                for(var i= 0; i< data_total.length; i++){
-                  var total = 0;
-                  if(data_total[i]['eva']=='Evaluacion medica'){
-                  total=total+(data_total[i]['count']*50);
-                  console.log(total);
+                  var total2 = 0;
+                for(var i= 0; i< data_total2.length; i++){
+                  if(data_total2[i]['eva']=='Evaluacion medica'){
+                  total2=total2+(data_total2[i]['count']*50);
+                  console.log(total2);
 
-                }if(data_total[i]['eva']=='Evaluacion psicologica'){
-                  total=total+(data_total[i]['count']*30);
-                  console.log(total);
+                }if(data_total2[i]['eva']=='Evaluacion psicologica'){
+                  total2=total2+(data_total2[i]['count']*30);
+                  console.log(total2);
 
-                }if(data_total[i]['eva']=='Evaluacion oftalmologica'){
-                  total=total+(data_total[i]['count']*30);
-                  console.log(total);
+                }if(data_total2[i]['eva']=='Evaluacion oftalmologica'){
+                  total2=total2+(data_total2[i]['count']*30);
+                  console.log(total2);
 
-                }if(data_total[i]['eva']=='Consulta externa'){
-                  total=total+(data_total[i]['count']*50);
-                  console.log(total);
+                }if(data_total2[i]['eva']=='Consulta externa'){
+                  total2=total2+(data_total2[i]['count']*50);
+                  console.log(total2);
 
                 }
-                    if(data_total[i]['mes']==j+1){
+                    if(data_total2[i]['mes']==j+1){
 
-                    data[j]=total;
+                    data[j]=total2;
                     }
                     else{
                       if(!data[j]){
-                        var total = 0;
+                        var total2 = 0;
                         data[j]=0
                       }
                     }

@@ -971,7 +971,7 @@ $(document).ready(function(){
                     <div class="form-group">
                     <label class="col-lg-3">Exploracion del abdomen</label>
                     <div class="col-lg-9">
-                        <input type="text" name="exa_med" placeholder="" class="form-control" value="BLANDO, NO DOLOROSO, RHA +">
+                        <input type="text" name="exa_med" placeholder="" class="form-control" value="RHA +, BLANDO, NO DOLOROSO ">
                     </div>
                     </div>
                     <label class="col-lg-9">4. EXPLORACION DEL APARATO LOCOMOTOR</label>

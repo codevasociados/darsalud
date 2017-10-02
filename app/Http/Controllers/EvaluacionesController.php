@@ -1175,9 +1175,9 @@ class EvaluacionesController extends Controller
         $pdf->SetXY(40, 185);
         $pdf->Write(0,$request->input('eca_med'),'','',false);
         $pdf->SetXY(40, 190);
-        $pdf->Write(0,$request->input('ecu_med'),'','',false);
-        $pdf->SetXY(40, 195);
         $pdf->Write(0,$request->input('ecr_med'),'','',false);
+        $pdf->SetXY(40, 195);
+        $pdf->Write(0,$request->input('ecu_med'),'','',false);
          $pdf->SetXY(130, 203);
         $pdf->Write(0,$request->input('ego_med'),'','',false);
          $pdf->SetXY(130, 210);
@@ -1969,9 +1969,9 @@ class EvaluacionesController extends Controller
         $pdf->SetXY(40, 185);
         $pdf->Write(0,$medica->ECA_MED,'','',false);
         $pdf->SetXY(40, 190);
-        $pdf->Write(0,$medica->ECU_MED,'','',false);
-        $pdf->SetXY(40, 195);
         $pdf->Write(0,$medica->ECR_MED,'','',false);
+        $pdf->SetXY(40, 195);
+        $pdf->Write(0,$medica->ECU_MED,'','',false);
          $pdf->SetXY(130, 203);
         $pdf->Write(0,$medica->EGO_MED,'','',false);
          $pdf->SetXY(130, 210);
