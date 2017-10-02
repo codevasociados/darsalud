@@ -303,7 +303,6 @@
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'Grafico')" id="defaultOpen">Anual general</button>
   <button class="tablinks" onclick="openCity(event, 'Graficobs')">Anual Bs.</button>
-  <button class="tablinks" onclick="openCity(event, 'Medicos')">Medicos</button>
 </div>
   <div id="Grafico" class="tabcontent">
     <div class="row">
@@ -329,18 +328,7 @@
         </div>
     </div>
   </div>
-  <div id="Medicos" class="tabcontent">
-    <div class="row">
-        <div class="col-md-12 col-md-offset">
-            <div class="panel panel-info">
-                <div class="panel-heading">Grafico general anual Bs. - Darsalud </div>
-                <div class="panel-body">
-                    <div id="container3"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
+
 </div>
 
 <script>

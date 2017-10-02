@@ -91,13 +91,13 @@
         <button class="tablinks" onclick="openCity(event, 'Consulta')" id="defaultOpen">Historia basica</button>
         <button class="tablinks" onclick="openCity(event, 'Laboratorios')">Laboratorios</button>
         <button class="tablinks" onclick="openCity(event, 'Recetas')">Recetas</button>
-        <div class="col-md-offset-8" style="padding:5px;">
+          <div class="col-md-offset-8" style="padding:5px;">
           <a class="btn btn-primary" type="button">Imprimir Historia basica</a>
           <a class="btn btn-danger" type="button">Finalizar consulta</a>
         </div>
       </div>
       <div id="Consulta" class="tabcontent">
-        <div class="tab">
+        <div class="tab tab2">
           <button class="tablinks2" onclick="openCity2(event, 'paciente')" id="defaultOpen2">Datos de paciente</button>
           <button class="tablinks2" onclick="openCity2(event, 'historia')" >Historial</button>
           <button class="tablinks2" onclick="openCity2(event, 'antecped')" >Antec. pediatricos</button>
@@ -111,45 +111,400 @@
         </div>
         <form class="" action="index.html" method="post">
         <div id="paciente" class="tabcontent2">
-
+            <div style="padding: 2% 10% 0 10%" class="form-group">
+          <fieldset class="">
+            <legend>Datos personales</legend>
+          <div class=" row form-group ">
+            <div class="col-lg-4">
+              <label for="" class="label label-primary">Nombre:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+            </div>
+            <div class="col-lg-4">
+              <label for="" class="label label-primary">Apellido paterno:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+            </div>
+            <div class="col-lg-4">
+              <label for="" class="label label-primary">Apellido materno:</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+            </div>
+          </div>
+          <div class=" row form-group">
+            <div class="col-lg-4">
+              <label for="" class="label label-success">Fecha de nacimiento:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+            </div>
+            <div class="col-lg-2">
+              <label for="" class="label label-success">Edad:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+            </div>
+            <div class="col-lg-2">
+              <label for="" class="label label-success">Genero</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+            </div>
+            <div class="col-lg-4">
+              <label for="" class="label label-success">Fecha de ingreso</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+            </div>
+          </div>
+          <div class=" row form-group">
+            <div class="col-lg-4">
+              <label for="" class="label label-warning">Profesion u oficio:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+            </div>
+            <div class="col-lg-4">
+              <label for="" class="label label-warning">Direccion:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+            </div>
+            <div class="col-lg-4">
+              <label for="" class="label label-warning">Telefono</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+            </div>
+          </div>
+        </fieldset>
+        </div>
         </div>
         <div id="historia" class="tabcontent2">
-          <h3>Paris</h3>
-          <p>Paris is the capital of France.</p>
+          <div style="padding: 2% 10% 0 10%" class="form-group">
+        <fieldset class="">
+          <legend>Datos generales</legend>
+        <div class=" row form-group ">
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Numero de Historia clinica:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-8">
+            <label for="" class="label label-primary">Alergias:</label> <input type="text" class="form-control" name="" placeholder="ALERGIAS" value="">
+          </div>
+
+        </div>
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Grupo sanguineo:</label> <input type="text" class="form-control" name="" placeholder="Grupo sanguineo" value="">
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Factor:</label><input type="text" class="form-control" name="" placeholder="Factor" value="">
+          </div>
+
+        </div>
+        <div class=" row form-group">
+            <a href="" >+ Agregar Razon de especial cuidado</a>
+        </div>
+      </fieldset>
+      </div>
         </div>
         <div id="antecped" class="tabcontent2">
-          <h3>Paris</h3>
-          <p>Paris is the capital of France.</p>
+          <div style="padding: 2% 10% 0 10%" class="form-group">
+        <fieldset class="">
+          <legend>Antecedentes pediatricos</legend>
+        <div class=" row form-group ">
+          <div class="col-lg-2">
+            <label for="" class="label label-primary">Peso Recien nacido:</label> <input type="text" class="form-control" name="" placeholder="Factor" value="">
+          </div>
+          <div class="col-lg-10">
+            <a href="#">+ Agregar Observacion perinatal</a>
+          </div>
+        </div>
+
+      </fieldset>
+      </div>
         </div>
         <div id="antecobs" class="tabcontent2">
-          <h3>Paris</h3>
-          <p>Paris is the capital of France.</p>
+          <div style="padding: 2% 10% 0 10%" class="form-group">
+        <fieldset class="">
+          <legend>Antecedentes obstetricos</legend>
+        <div class=" row form-group ">
+            <fieldset>
+              <legend>Embarazo</legend>
+          <div class="col-lg-3">
+            <label for="" class="label label-primary">G:</label><input type="text" class="form-control" name="" placeholder="G" value="">
+          </div>
+          <div class="col-lg-3">
+            <label for="" class="label label-primary">P:</label><input type="text" class="form-control" name="" placeholder="P" value="">
+          </div>
+          <div class="col-lg-3">
+            <label for="" class="label label-primary">A:</label><input type="text" class="form-control" name="" placeholder="A" value="">
+          </div>
+          <div class="col-lg-3">
+            <label for="" class="label label-primary">C:</label><input type="text" class="form-control" name="" placeholder="C" value="">
+          </div>
+        </fieldset>
+        </div>
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Fecha de nacimiento:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Edad:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Genero</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Fecha de ingreso</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Profesion u oficio:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Direccion:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Telefono</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+      </fieldset>
+      </div>
         </div>
         <div id="anticon" class="tabcontent2">
-          <h3>Paris</h3>
-          <p>Paris is the capital of France.</p>
+          <div style="padding: 2% 10% 0 10%" class="form-group">
+        <fieldset class="">
+          <legend>Datos personales</legend>
+        <div class=" row form-group ">
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Nombre:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Apellido paterno:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Apellido materno:</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Fecha de nacimiento:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Edad:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Genero</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Fecha de ingreso</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Profesion u oficio:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Direccion:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Telefono</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+      </fieldset>
+      </div>
         </div>
         <div id="lact" class="tabcontent2">
-          <h3>Paris</h3>
-          <p>Paris is the capital of France.</p>
+          <div style="padding: 2% 10% 0 10%" class="form-group">
+        <fieldset class="">
+          <legend>Datos personales</legend>
+        <div class=" row form-group ">
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Nombre:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Apellido paterno:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Apellido materno:</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Fecha de nacimiento:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Edad:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Genero</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Fecha de ingreso</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Profesion u oficio:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Direccion:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Telefono</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+      </fieldset>
+      </div>
         </div>
         <div id="facries" class="tabcontent2">
-          <h3>Paris</h3>
-          <p>Paris is the capital of France.</p>
+          <div style="padding: 2% 10% 0 10%" class="form-group">
+        <fieldset class="">
+          <legend>Datos personales</legend>
+        <div class=" row form-group ">
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Nombre:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Apellido paterno:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Apellido materno:</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Fecha de nacimiento:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Edad:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Genero</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Fecha de ingreso</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Profesion u oficio:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Direccion:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Telefono</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+      </fieldset>
+      </div>
         </div>
         <div id="riesgo" class="tabcontent2">
-          <h3>Paris</h3>
-          <p>Paris is the capital of France.</p>
+          <div style="padding: 2% 10% 0 10%" class="form-group">
+        <fieldset class="">
+          <legend>Datos personales</legend>
+        <div class=" row form-group ">
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Nombre:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Apellido paterno:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Apellido materno:</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Fecha de nacimiento:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Edad:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Genero</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Fecha de ingreso</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Profesion u oficio:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Direccion:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Telefono</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+      </fieldset>
+      </div>
         </div>
         <div id="patologico" class="tabcontent2">
-          <h3>Paris</h3>
-          <p>Paris is the capital of France.</p>
+          <div style="padding: 2% 10% 0 10%" class="form-group">
+        <fieldset class="">
+          <legend>Datos personales</legend>
+        <div class=" row form-group ">
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Nombre:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Apellido paterno:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Apellido materno:</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Fecha de nacimiento:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Edad:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Genero</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Fecha de ingreso</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Profesion u oficio:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Direccion:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Telefono</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+      </fieldset>
+      </div>
         </div>
         <div id="enfcro" class="tabcontent2">
-          <h3>Paris</h3>
-          <p>Paris is the capital of France.</p>
+          <div style="padding: 2% 10% 0 10%" class="form-group">
+        <fieldset class="">
+          <legend>Datos personales</legend>
+        <div class=" row form-group ">
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Nombre:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Apellido paterno:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-primary">Apellido materno:</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
         </div>
-        <div class="modal-footer">
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Fecha de nacimiento:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Edad:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-2">
+            <label for="" class="label label-success">Genero</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-success">Fecha de ingreso</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+        <div class=" row form-group">
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Profesion u oficio:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Direccion:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+          </div>
+          <div class="col-lg-4">
+            <label for="" class="label label-warning">Telefono</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+          </div>
+        </div>
+      </fieldset>
+      </div>
+        </div>
+        <div class="modal-footer col-lg-12">
           <button type="button" class="btn btn-success" name="button">Guardar</button>
           <button type="button" class="btn btn-primary" name="button">Nueva nota de evolucion</button>
         </div>
