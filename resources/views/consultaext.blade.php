@@ -176,7 +176,7 @@
 
         </div>
         <div class=" row form-group">
-            <a href="" >+ Agregar Razon de especial cuidado</a>
+            <a href="#" >+ Agregar Razon de especial cuidado</a>
         </div>
       </fieldset>
       </div>
@@ -219,29 +219,7 @@
         </fieldset>
         </div>
         <div class=" row form-group">
-          <div class="col-lg-4">
-            <label for="" class="label label-success">Fecha de nacimiento:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
-          </div>
-          <div class="col-lg-2">
-            <label for="" class="label label-success">Edad:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
-          </div>
-          <div class="col-lg-2">
-            <label for="" class="label label-success">Genero</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
-          </div>
-          <div class="col-lg-4">
-            <label for="" class="label label-success">Fecha de ingreso</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
-          </div>
-        </div>
-        <div class=" row form-group">
-          <div class="col-lg-4">
-            <label for="" class="label label-warning">Profesion u oficio:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
-          </div>
-          <div class="col-lg-4">
-            <label for="" class="label label-warning">Direccion:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
-          </div>
-          <div class="col-lg-4">
-            <label for="" class="label label-warning">Telefono</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
-          </div>
+          <a href="#">+ Agregar nuevo registro </a>
         </div>
       </fieldset>
       </div>
