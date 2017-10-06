@@ -17,10 +17,13 @@
     {!! Html::script('assets/js/bootstrap.js')!!}
     {!! Html::script('assets/js/pestania.js')!!}
     {!! Html::style('assets/css/pestania.css') !!}
+    <style type="text/css">
+    .fila-base{ display: none; } /* fila base oculta */
+    .eliminar{ cursor: pointer; color: #000; }
+    </style>
     <script type="text/javascript">
     function limita(elEvento, maximoCaracteres) {
       var elemento = document.getElementById("texto");
-
       // Obtener la tecla pulsada
       var evento = elEvento || window.event;
       var codigoCaracter = evento.charCode || evento.keyCode;
@@ -28,7 +31,6 @@
       if(codigoCaracter == 37 || codigoCaracter == 39) {
         return true;
       }
-
       // Permitir borrar con la tecla Backspace y con la tecla Supr.
       if(codigoCaracter == 8 || codigoCaracter == 46) {
         return true;
@@ -46,13 +48,10 @@
       function pdfreceta()
       {
         document.fmedica.submit();
-
-
       }
     </script>
     <script language="Javascript">
     function preguntar(data1){
-
     if (confirm("¿Esta seguro/a de salir?. Los datos se perderan!?")==true){
     location='/pacientes/'+data1;
     }
@@ -167,25 +166,26 @@
      </nav>
     <div class="container-fluid panel" style="padding:20px;">
       <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'Consulta')" id="defaultOpen">Historia basica</button>
-        <button class="tablinks" onclick="openCity(event, 'Laboratorios')">Laboratorios</button>
-        <button class="tablinks" onclick="openCity(event, 'Recetas')">Recetas</button>
+        <button class="tablinks" type="button" onclick="openCity(event, 'Consulta')" id="defaultOpen">Historia basica</button>
+        <button class="tablinks" type="button" onclick="openCity(event, 'Laboratorios')">Laboratorios</button>
+        <button class="tablinks" type="button" onclick="openCity(event, 'Recetas')">Recetas</button>
           <div class="col-md-offset-8" style="padding:5px;">
           <a class="btn btn-danger" type="button">Finalizar consulta</a>
         </div>
       </div>
+    <form class="" action="{{url($id.'/consultaexterna'.'/'.$ids.'/pdfconsultaext')}}" target="_blank" accept-charset="UTF-8"  enctype="multipart/form-data" method="post">
       <div id="Consulta" class="tabcontent">
         <div class="tab tab2">
-          <button class="tablinks2" onclick="openCity2(event, 'paciente')" id="defaultOpen2">Datos de paciente</button>
-          <button class="tablinks2" onclick="openCity2(event, 'historia')" >Historial</button>
-          <button class="tablinks2" onclick="openCity2(event, 'antecped')" >Antec. pediatricos</button>
-          <button class="tablinks2" onclick="openCity2(event, 'antecobs')" >Antec. obstectricos</button>
-          <button class="tablinks2" onclick="openCity2(event, 'anticon')" >Anticoncepcion</button>
-          <button class="tablinks2" onclick="openCity2(event, 'lact')">Lactancia</button>
-          <button class="tablinks2" onclick="openCity2(event, 'facries')">Factor Riesgo</button>
-          <button class="tablinks2" onclick="openCity2(event, 'riesgo')">Riesgos</button>
-          <button class="tablinks2" onclick="openCity2(event, 'patologico')">Antec. patologicos</button>
-          <button class="tablinks2" onclick="openCity2(event, 'enfcro')">Enfermedades cronicas</button>
+          <button class="tablinks2" type="button" onclick="openCity2(event, 'paciente')" id="defaultOpen2">Datos de paciente</button>
+          <button class="tablinks2" type="button" onclick="openCity2(event, 'historia')" >Historial</button>
+          <button class="tablinks2" type="button" onclick="openCity2(event, 'antecped')" >Antec. pediatricos</button>
+          <button class="tablinks2" type="button" onclick="openCity2(event, 'antecobs')" >Antec. obstectricos</button>
+          <button class="tablinks2" type="button" onclick="openCity2(event, 'anticon')" >Anticoncepcion</button>
+          <button class="tablinks2" type="button" onclick="openCity2(event, 'lact')">Lactancia</button>
+          <button class="tablinks2" type="button" onclick="openCity2(event, 'facries')">Factor Riesgo</button>
+          <button class="tablinks2" type="button" onclick="openCity2(event, 'riesgo')">Riesgos</button>
+          <button class="tablinks2" type="button" onclick="openCity2(event, 'patologico')">Antec. patologicos</button>
+          <button class="tablinks2" type="button" onclick="openCity2(event, 'enfcro')">Enfermedades cronicas</button>
         </div>
         <form class="" action="index.html" method="post">
         <div id="paciente" class="tabcontent2">
@@ -260,7 +260,21 @@
 
         </div>
         <div class=" row form-group">
-            <a href="#" >+ Agregar Razon de especial cuidado</a>
+            <a href="#" id="agregar" >+ Agregar Razon de especial cuidado</a>
+            <table id="tabla" class="table table-hover">
+            	<thead>
+            		<tr>
+            			<th>Razon</th>
+            			<th>Eliminar</th>
+            		</tr>
+            	</thead>
+            	<tbody>
+            		<tr class="fila-base">
+            			<td><input type="text" class="form-control" placeholder="Razon de especial cuidado" /></td>
+            			<td class="eliminar"><button type="button" class="btn btn-danger" name="button"><span class="fa fa-close"></span></button></td>
+            		</tr>
+            	</tbody>
+            </table>
         </div>
       </fieldset>
       </div>
@@ -274,7 +288,21 @@
             <label for="" class="label label-primary">Peso Recien nacido:</label> <input type="text" class="form-control" name="" placeholder="Factor" value="">
           </div>
           <div class="col-lg-10">
-            <a href="#">+ Agregar Observacion perinatal</a>
+            <a href="#" id="agregar2">+ Agregar Observacion perinatal</a>
+            <table id="tabla2" class="table table-hover">
+            	<thead>
+            		<tr>
+            			<th>Observaciones perinatales</th>
+            			<th>Eliminar</th>
+            		</tr>
+            	</thead>
+            	<tbody>
+            		<tr class="fila-base">
+            			<td><input type="text" class="form-control" placeholder="Observaciones perinatales" /></td>
+            			<td class="eliminar"><button type="button" class="btn btn-danger" name="button"><span class="fa fa-close"></span></button></td>
+            		</tr>
+            	</tbody>
+            </table>
           </div>
         </div>
 
@@ -303,7 +331,40 @@
         </fieldset>
         </div>
         <div class=" row form-group">
-          <a href="#">+ Agregar nuevo registro </a>
+          <a href="#" id="agregar3">+ Agregar nuevo registro </a>
+          <table id="tabla3" class="table table-hover">
+            <thead>
+              <tr >
+                <th rowspan="2"><center>Año</center></th>
+                <th rowspan="2"><center>Duracion meses</center></th>
+                <th colspan="2" class="danger"><center>Tipo de parto</center></th>
+                <th colspan="2" class="success"><center>Nro de recien nacidos</center></th>
+                <th colspan="2" class="info"><center>PAP Colposcopia</center></th>
+                <th rowspan="2"><center>Eliminar</center></th>
+              </tr>
+              <tr>
+                <th class="danger"><center>Vaginal</center></th>
+                <th class="danger"><center>Cesarea</center></th>
+                <th class="success"><center>Vivos</center></th>
+                <th class="success"><center>Muertos</center></th>
+                <th class="info"><center>Fecha</center></th>
+                <th class="info"><center>Resultado</center></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="fila-base">
+                <td><input type="text" class="form-control" placeholder="Año" /></td>
+                <td><input type="text" class="form-control" placeholder="Duracion meses" /></td>
+                <td><input type="text" class="form-control" placeholder="Parto vaginal" /></td>
+                <td><input type="text" class="form-control" placeholder="Parto cesarea" /></td>
+                <td><input type="number" class="form-control" placeholder="Vivos" /></td>
+                <td><input type="number" class="form-control" placeholder="Muertos" /></td>
+                <td><input type="date" class="form-control" placeholder="Fecha" /></td>
+                <td><input type="text" class="form-control" placeholder="Resultado" /></td>
+                <td class="eliminar"><button type="button" class="btn btn-danger" name="button"><span class="fa fa-close"></span></button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </fieldset>
       </div>
@@ -313,7 +374,27 @@
         <fieldset class="">
           <legend>Anticoncepcion</legend>
         <div class=" row form-group ">
-          <a href="#">+ Agregar nuevo registro </a>
+          <a href="#" id="agregar4">+ Agregar nuevo registro </a>
+          <table id="tabla4" class="table table-hover">
+            <thead>
+              <tr>
+                <th>Inicio</th>
+                <th>Metodo</th>
+                <th>Control</th>
+                <th>Orientacion</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="fila-base">
+                <td><input type="text" class="form-control" placeholder="Inicio" /></td>
+                <td><input type="text" class="form-control" placeholder="Metodo" /></td>
+                <td><input type="text" class="form-control" placeholder="Control" /></td>
+                <td><input type="text" class="form-control" placeholder="Orientacion" /></td>
+                <td class="eliminar"><button type="button" class="btn btn-danger" name="button"><span class="fa fa-close"></span></button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </fieldset>
       </div>
@@ -337,7 +418,21 @@
         <fieldset class="">
           <legend>Factor de riesgos sociales</legend>
         <div class=" row form-group ">
-          <a href="#">+ Añadir nuevo factor de riesgo social</a>
+          <a href="#" id="agregar5">+ Añadir nuevo factor de riesgo social</a><br/><br/>
+          <table id="tabla5" class="table table-hover">
+            <thead>
+              <tr>
+                <th>Factor de riesgo social</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="fila-base">
+                <td><input type="text" class="form-control" placeholder="Factor de riesgo social" /></td>
+                <td class="eliminar"><button type="button" class="btn btn-danger" name="button"><span class="fa fa-close"></span></button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </fieldset>
       </div>
@@ -426,7 +521,25 @@
         <fieldset class="">
           <legend>Antecedentes patologicos</legend>
         <div class=" row form-group ">
-          <a href="#">+ Añadir nuevo antecedente patologico</a>
+          <a href="#" id="agregar6">+ Añadir nuevo antecedente patologico</a>
+          <table id="tabla6" class="table table-hover">
+            <thead>
+              <tr>
+                <th>Hospitalizado por</th>
+                <th>Año</th>
+                <th>Evaluacion</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="fila-base">
+                <td><input type="text" class="form-control" placeholder="Hospitalizado por" /></td>
+                <td><input type="text" class="form-control" placeholder="Año" /></td>
+                <td><input type="text" class="form-control" placeholder="Evaluacion" /></td>
+                <td class="eliminar"><button type="button" class="btn btn-danger" name="button"><span class="fa fa-close"></span></button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </fieldset>
       </div>
@@ -436,14 +549,32 @@
         <fieldset class="">
           <legend>Medicamentos en enfermedades cronicas</legend>
         <div class=" row form-group ">
-          <a href="#">+ Añadir nuevo medicamento</a>
+          <a href="#" id="agregar7">+ Añadir nuevo medicamento</a><br><br>
+          <table id="tabla7" class="table table-hover">
+            <thead>
+              <tr>
+                <th>Medicamentos</th>
+                <th>Dosificacion</th>
+                <th>Final</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="fila-base">
+                <td><input type="text" class="form-control" placeholder="Medicamentos" /></td>
+                <td><input type="text" class="form-control" placeholder="Dosificacion" /></td>
+                <td><input type="text" class="form-control" placeholder="Final" /></td>
+                <td class="eliminar"><button type="button" class="btn btn-danger" name="button"><span class="fa fa-close"></span></button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </fieldset>
       </div>
         </div>
         <div class="modal-footer col-lg-12">
-          <button type="button" class="btn btn-success" name="button">Guardar</button>
-          <a class="btn btn-warning" type="button">Imprimir Historia basica</a>
+          <button type="submit" class="btn btn-success" name="button">Guardar</button>
+          <button class="btn btn-warning" type="submit">Imprimir Historia basica</button>
           <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary" name="button">+ Nueva nota de evolucion</button>
         </div>
       </div>
@@ -517,5 +648,70 @@
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
     document.getElementById("defaultOpen2").click();
+    </script>
+    <script type="text/javascript">
+      $(function(){
+        	$("#agregar").on('click', function(){
+      		$("#tabla tbody tr:eq(0)").clone().removeClass('fila-base').appendTo("#tabla tbody");
+      	});
+    	$(document).on("click",".eliminar",function(){
+        		var parent = $(this).parents().get(0);
+        		$(parent).remove();
+        	});
+      });
+      $(function(){
+        	$("#agregar2").on('click', function(){
+      		$("#tabla2 tbody tr:eq(0)").clone().removeClass('fila-base').appendTo("#tabla2 tbody");
+      	});
+    	$(document).on("click",".eliminar",function(){
+        		var parent = $(this).parents().get(0);
+        		$(parent).remove();
+        	});
+      });
+      $(function(){
+        	$("#agregar3").on('click', function(){
+      		$("#tabla3 tbody tr:eq(0)").clone().removeClass('fila-base').appendTo("#tabla3 tbody");
+      	});
+    	$(document).on("click",".eliminar",function(){
+        		var parent = $(this).parents().get(0);
+        		$(parent).remove();
+        	});
+      });
+      $(function(){
+        	$("#agregar4").on('click', function(){
+      		$("#tabla4 tbody tr:eq(0)").clone().removeClass('fila-base').appendTo("#tabla4 tbody");
+      	});
+    	$(document).on("click",".eliminar",function(){
+        		var parent = $(this).parents().get(0);
+        		$(parent).remove();
+        	});
+      });
+      $(function(){
+        	$("#agregar5").on('click', function(){
+      		$("#tabla5 tbody tr:eq(0)").clone().removeClass('fila-base').appendTo("#tabla5 tbody");
+      	});
+    	$(document).on("click",".eliminar",function(){
+        		var parent = $(this).parents().get(0);
+        		$(parent).remove();
+        	});
+      });
+      $(function(){
+        	$("#agregar6").on('click', function(){
+      		$("#tabla6 tbody tr:eq(0)").clone().removeClass('fila-base').appendTo("#tabla6 tbody");
+      	});
+    	$(document).on("click",".eliminar",function(){
+        		var parent = $(this).parents().get(0);
+        		$(parent).remove();
+        	});
+      });
+      $(function(){
+        	$("#agregar7").on('click', function(){
+      		$("#tabla7 tbody tr:eq(0)").clone().removeClass('fila-base').appendTo("#tabla7 tbody");
+      	});
+    	$(document).on("click",".eliminar",function(){
+        		var parent = $(this).parents().get(0);
+        		$(parent).remove();
+        	});
+      });
     </script>
     </html>

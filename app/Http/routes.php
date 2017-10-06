@@ -94,6 +94,7 @@ Route::post('pacientes/{id}/pdflaboratorio','PdfController@pdflaboratorios');
 Route::get('pacientes/{id}/historiabasica','historiabasicaController@index');
 Route::get('{id}/evaluacionmedica/{ids}/finalizar','PacientesController@finalizar');
 Route::post('{id}/evaluacionpsicologica/{ids}/pdfpsico','EvaluacionesController@pdfpsico');
+Route::post('{id}/consultaexterna/{ids}/pdfconsultaext','EvaluacionesController@pdfexterna');
 Route::post('{id}/evaluacionoftalmologica/{ids}/pdfoftalmo','EvaluacionesController@pdfoftalmo');
 Route::get('{id}/evaluacionoftalmologica/{ids}/finalizar','PacientesController@finalizar');
 Route::post('{id}/evaluacionmedica/{ids}/pdfmedi','EvaluacionesController@pdfmedi');

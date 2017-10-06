@@ -7,13 +7,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<title>Dar salud - SISTEMA INFORMATICO MEDICO</title>
-	{!! Html::style('assets/css/bootstrap.css') !!}
+	  {!! Html::style('assets/css/bootstrap.css') !!}
     {!! Html::style('css/table/jquery.dataTables.css')!!}
     {!! Html::style('font-awesome-4.6.3/css/font-awesome.css')!!}
     {!! Html::style('assets/css/sidebar.css') !!}
     {!! Html::script('assets/js/ajax.js')!!}
     {!! Html::script('assets/js/sidebar2.js')!!}
-{!! Html::script('js/table/jquery.dataTables.js')!!}
+    {!! Html::script('js/table/jquery.dataTables.js')!!}
     {!! Html::script('assets/js/bootstrap.js')!!}
 <script type="text/javascript">
 function limita(elEvento, maximoCaracteres) {
@@ -115,7 +115,13 @@ $(document).ready(function(){
                     <div id="menueva2" style="position: fixed; background-color:#B0EBEF; opacity: 100%; top: 9%; height:61px; z-index: 99; width:100%; padding:1% 8% 0 8%; font-size: 20px; ">EVALUACION MEDICA</div>
 <div class="container">
 <div  style="width:100%; background:#fff; margin-top:1%;">
-    <div class="alert alert-info" style=" z-index: 1000;font-size:23px;">Evaluacion Medica <div id="menueva" style="right: 5%; top: 11%;  z-index: 100; position: fixed;"><button type="button" style="margin-left:-20%;" class="btn btn-success" onclick="javascript:datospac();"><span class="fa fa-refresh"></span></button><button class="btn" style="margin-left:1%; background-color: #279495; color:white" type="submit" name="guardar" formnovalidate formtarget=""><span class="fa fa-floppy-o"></span></button><a style="margin-left:1%;" href="../../<?php echo 'pacientes/'.$id;?>" class="btn btn-warning">Ver historial clinico</a> <button name="imprimir" type = "submit" target="_blank" class = "btn btn-primary" data-dismiss = "modal"><span class="fa fa-print"></span>
+    <div class="alert alert-info" style=" z-index: 1000;font-size:23px;">Evaluacion Medica
+      <div id="menueva" style="right: 5%; top: 11%;  z-index: 100; position: fixed;">
+        <button type="button" style="margin-left:-20%;" class="btn btn-success" onclick="javascript:datospac();"><span class="fa fa-refresh"></span></button>
+        <button class="btn" style="margin-left:1%; background-color: #279495; color:white" type="submit" name="guardar" formnovalidate formtarget="">
+        <span class="fa fa-floppy-o"></span></button>
+        <a style="margin-left:1%;" href="../../<?php echo 'pacientes/'.$id;?>" class="btn btn-warning">Ver historial clinico</a>
+        <button name="imprimir" type = "submit" target="_blank" class = "btn btn-primary" data-dismiss = "modal"><span class="fa fa-print"></span>
               Imprimir
             </button><a style="margin-left:1%;" href="<?php echo $ids;?>/finalizar" class="btn btn-danger">Finalizar</a></div></div>
     <div class="alert panel panel-success cuerpo" style="background:#fff; margin-top:-2.7%">

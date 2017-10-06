@@ -2475,6 +2475,181 @@ class EvaluacionesController extends Controller
       $receta->FEC_REC=Carbon::now();
       //$receta->save();
     }
+
+    public function pdfexterna(Request $request,$id,$ids)
+    {
+      $pagelayout = array('165', '107.5');
+      $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
+      $pdf->SetTitle('Consulta externa - DARSALUD');
+      $pdf->setPrintHeader(false);
+      $pdf->setPrintFooter(false);
+      $pdf->SetAutoPageBreak(TRUE, 10);
+      $pdf->SetMargins(15, 15, 10);
+      $pdf->AddPage();
+
+      // Margenes
+      $pdf->Line ( 5, 5,210,5,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 12, 89)));
+      $pdf->Line ( 5, 5,5,273,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 12, 89)));
+      $pdf->Line ( 5, 273,210,273,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 12, 89)));
+      $pdf->Line ( 210, 5,210,273,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 12, 89)));
+      //end margenes
+      $pdf->Line ( 5, 70,210,70,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 12, 89)));
+      $pdf->Line ( 140, 5,140,70,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 12, 89)));
+      $pdf->Image('img/logo.png', 7, 7, 20, 20, 'PNG', '', '', true, 250, '', false, false, false, false, false, false);
+
+      $pdf->SetFont('','B','11');
+      $pdf->SetXY(87, 9);
+      $pdf->Write(0,'HISTORIA BASICA','','',false);
+      $pdf->SetFont('','B','11');
+      $pdf->SetXY(85, 16);
+      $pdf->Write(0,'CONSULTA EXTERNA','','',false);
+      $pdf->SetFont('','B','9');
+
+      $pdf->SetXY(143, 15);
+      $pdf->Write(0,'N° Historia clinica:','','',false);
+      $pdf->SetFont('','B','9');
+
+      $pdf->SetXY(143, 22);
+      $pdf->Write(0,'Alergias:','','',false);
+      $pdf->SetFont('','B','9');
+
+      $pdf->SetXY(143, 35);
+      $pdf->Write(0,'Sanguineo:','','',false);
+      $pdf->SetFont('','B','9');
+      $pdf->SetXY(175, 35);
+      $pdf->Write(0,'Factor:','','',false);
+      $pdf->SetFont('','B','9');
+
+      $pdf->SetXY(143, 44);
+      $pdf->Write(0,'Razon de especial cuidado:','','',false);
+      $pdf->SetFont('','B','9');
+
+      $paciente=Paciente::where('id','=',$id)->first();
+
+      $pdf->SetXY(13, 37);
+      $pdf->Write(0,'Apellido Paterno','','',false);
+      $pdf->SetFont('','B','9');
+      $pdf->Line ( 8, 36,43,36,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
+
+      $pdf->SetXY(53, 37);
+      $pdf->Write(0,'Apellido Materno','','',false);
+      $pdf->SetFont('','B','9');
+      $pdf->Line ( 47, 36,87,36,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
+
+      $pdf->SetXY(107, 37);
+      $pdf->Write(0,'Nombres','','',false);
+      $pdf->SetFont('','B','9');
+      $pdf->Line ( 93, 36,135,36,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
+
+      $pdf->SetXY(10, 50);
+      $pdf->Write(0,'Fecha de Nacimiento','','',false);
+      $pdf->SetFont('','B','9');
+      $pdf->Line ( 8, 49,43,49,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
+
+      $pdf->SetXY(57, 50);
+      $pdf->Write(0,'Edad','','',false);
+      $pdf->SetFont('','B','9');
+      $pdf->Line (52, 49,72,49,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
+
+      $pdf->SetXY(90, 50);
+      $pdf->Write(0,'Genero','','',false);
+      $pdf->SetFont('','B','9');
+      $pdf->Line ( 77, 49,120,49,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
+
+      $pdf->SetXY(10, 55);
+      $pdf->Write(0,'Profesion u oficio:','','',false);
+      $pdf->SetFont('','B','9');
+
+      $pdf->SetXY(80, 55);
+      $pdf->Write(0,'Fecha de ingreso: ','','',false);
+      $pdf->SetFont('','B','9');
+
+      $pdf->SetXY(10, 60);
+      $pdf->Write(0,'Direccion:','','',false);
+      $pdf->SetFont('','B','9');
+
+      $pdf->SetXY(10, 65);
+      $pdf->Write(0,'Telefono:','','',false);
+      $pdf->SetFont('','B','9');
+
+      $pdf->SetXY(10, 75);
+      $html='
+      <table border="1">
+        <thead>
+          <tr>
+            <td align="center" colspan="1" width="20%">
+            Antecedentes<br>pediatricos
+            </td>
+            <td align="center" colspan="8" width="60%">
+            Antecedentes obstetricos
+            </td>
+            <td align="center" rowspan="3" colspan="4" width="20%">
+            Anticoncepcion
+            </td>
+          </tr>
+          <tr>
+            <td >
+            Peso R.N.
+            </td>
+            <td align="center" colspan="8">
+            Embarazo: G........................ P........................A........................C........................
+            </td>
+          </tr>
+          <tr>
+            <td  align="center"colspan="1">
+            </td>
+            <td align="center" rowspan="2" colspan="1"> Año
+            </td>
+            <td align="center" rowspan="1"> Duracion <br> meses
+            </td>
+            <td align="center" colspan="2"> Tipo de parto
+            </td>
+            <td align="center" colspan="2"> Nro de recien <br> nacidos
+            </td>
+            <td align="center" colspan="2"> PAP Colposcopia
+            </td>
+            <td align="center" colspan="4">
+            </td>
+          </tr>
+          <tr>
+            <td align="center">Observaciones Perinatales
+            </td>
+            <td align="center">
+            </td>
+            <td align="center">Vaginal
+            </td>
+            <td align="center">Cesarea
+            </td>
+            <td align="center">Vivos
+            </td>
+            <td align="center">Muertos
+            </td>
+            <td align="center">Fecha
+            </td>
+
+            <td align="center"><font size="8">Resultado</font>
+            </td>
+            <td align="center"><font size="7">Inicio</font>
+            </td>
+            <td align="center"><font size="7">Metodo</font>
+            </td>
+            <td align="center"><font size="7">Control</font>
+            </td>
+            <td align="center"><font size="7">Orientacion</font>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+      ';
+      $pdf->writeHTML($html, true, false, true, false, '');
+      $pdf->write2DBarcode ( 'Paciente :'.$paciente->NOM_PAC.' '.$paciente->APA_PAC.' '.$paciente->AMA_PAC.' | Medico: '.Auth::user()->NOM_USU.' '.Auth::user()->APA_USU.' '.Auth::user()->AMA_USU.' | Fecha:'.'$receta->FEC_REC', 'QRCODE,M', 180, 240, 25, 25, '','','');
+
+
+      $pdf->Output('Consulta externa.pdf');
+    }
     /**
      * Display the specified resource.
      *
