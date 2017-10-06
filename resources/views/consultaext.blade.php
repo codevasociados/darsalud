@@ -74,6 +74,85 @@
     </script>
 </head>
 <body style="background-color:#EFEEEE">
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Nota de evolucion</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="">Fecha:</label>
+                <span class=""> {{\Carbon\Carbon::now()->format('d-m-Y')}}</span>
+              </div>
+              <div class="row form-group">
+                <label for="" class="col-md-1">R:</label>
+                <span class="col-md-4"><input type="text" class="form-control" name="" value=""></span>
+                <label for="" class="col-md-1">N:</label>
+                <span class="col-md-4 "><input type="text" class="form-control" name="" value=""></span>
+              </div>
+              <div class="row form-group">
+                <label for="" class="col-md-7">Edad actual:</label>
+                <span class="col-md-5"> 12</span>
+              </div>
+              <div class="row form-group">
+                <label for="" class="col-md-3">Peso:</label>
+                <span class="col-md-9"><input type="text" class="form-control" name="" value=""></span>
+              </div>
+              <div class="row form-group">
+                <label for="" class="col-md-3">Talla:</label>
+                <span class="col-md-9"><input type="text" class="form-control" name="" value=""></span>
+              </div>
+              <div class="row form-group">
+                <label for="" class="col-md-3">P.A.:</label>
+                <span class="col-md-9"><input type="text" class="form-control" name="" value=""></span>
+              </div>
+              <div class="row form-group">
+                <label for="" class="col-md-3">F.C.:</label>
+                <span class="col-md-9"><input type="text" class="form-control" name="" value=""></span>
+              </div>
+              <div class="row form-group">
+                <label for="" class="col-md-6">Temperatura:</label>
+                <span class="col-md-6"><input type="text" class="form-control" name="" value=""></span>
+              </div>
+              <div class="row form-group">
+                <label for="" class="col-md-3">F.U.M:</label>
+                <span class="col-md-9"><input type="text" class="form-control" name="" value=""></span>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="row form-group">
+                <label for="" class="col-md-3">Subjetivo:</label>
+                <span class="col-md-9"><textarea name="name" rows="4" cols="80" class="form-control"></textarea></span>
+              </div>
+              <div class="row form-group">
+                <label for="" class="col-md-3">Objetivo:</label>
+                <span class="col-md-9"><textarea name="name" rows="4" cols="80" class="form-control"></textarea></span>
+              </div>
+              <div class="row form-group">
+                <label for="" class="col-md-3">Analisis:</label>
+                <span class="col-md-9"><textarea name="name" rows="4" cols="80" class="form-control"></textarea></span>
+              </div>
+              <div class="row form-group">
+                <label for="" class="col-md-3">Plan de acción:</label>
+                <span class="col-md-9"><textarea name="name" rows="4" cols="80" class="form-control"></textarea></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
   <nav class="navbar navbar-inverse no-margin" style="border-radius: 0; background-color: #000;">
      <!-- Brand and toggle get grouped for better mobile display -->
                  <div class="navbar-header fixed-brand" >
@@ -92,7 +171,6 @@
         <button class="tablinks" onclick="openCity(event, 'Laboratorios')">Laboratorios</button>
         <button class="tablinks" onclick="openCity(event, 'Recetas')">Recetas</button>
           <div class="col-md-offset-8" style="padding:5px;">
-          <a class="btn btn-primary" type="button">Imprimir Historia basica</a>
           <a class="btn btn-danger" type="button">Finalizar consulta</a>
         </div>
       </div>
@@ -127,27 +205,33 @@
           </div>
           <div class=" row form-group">
             <div class="col-lg-4">
-              <label for="" class="label label-success">Fecha de nacimiento:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+              <label for="" class="label label-success">Fecha de nacimiento:</label> <span class="form-control">{{$paciente->FEC_NAC}}</span>
             </div>
             <div class="col-lg-2">
-              <label for="" class="label label-success">Edad:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+              <label for="" class="label label-success">Edad:</label> <span class="form-control"><?php
+                  $edad = \Carbon\Carbon::createFromFormat('Y-m-d', $paciente->FEC_NAC)->format('Y');
+                  $edad2 = \Carbon\Carbon::createFromFormat('Y-m-d', $paciente->FEC_NAC)->format('m');
+                  $edad3 = \Carbon\Carbon::createFromFormat('Y-m-d', $paciente->FEC_NAC)->format('d');
+                  $categorias= \Darsalud\Categorialaboratorio::get();
+                  echo $date = \Carbon\Carbon::createFromDate($edad,$edad3,$edad2)->age;
+                  ?></span>
             </div>
             <div class="col-lg-2">
-              <label for="" class="label label-success">Genero</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+              <label for="" class="label label-success">Genero</label> <span class="form-control">{{$paciente->SEX_PAC}}</span>
             </div>
             <div class="col-lg-4">
-              <label for="" class="label label-success">Fecha de ingreso</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+              <label for="" class="label label-success">Fecha de ingreso</label> <span class="form-control">{{\Carbon\Carbon::now()->format('d/m/Y H:i')}}</span>
             </div>
           </div>
           <div class=" row form-group">
             <div class="col-lg-4">
-              <label for="" class="label label-warning">Profesion u oficio:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+              <label for="" class="label label-warning">Profesion u oficio:</label> <span class="form-control">{{$paciente->PRO_PAC}}</span>
             </div>
             <div class="col-lg-4">
-              <label for="" class="label label-warning">Direccion:</label> <span class="form-control">{{$paciente->APA_PAC}}</span>
+              <label for="" class="label label-warning">Direccion:</label> <input class="form-control" type="text" placeholder="Direccion del paciente"></input>
             </div>
             <div class="col-lg-4">
-              <label for="" class="label label-warning">Telefono</label> <span class="form-control">{{$paciente->AMA_PAC}}</span>
+              <label for="" class="label label-warning">Telefono</label> <span class="form-control">{{$paciente->REF_PAC}}</span>
             </div>
           </div>
         </fieldset>
@@ -159,7 +243,7 @@
           <legend>Datos generales</legend>
         <div class=" row form-group ">
           <div class="col-lg-4">
-            <label for="" class="label label-primary">Numero de Historia clinica:</label> <span class="form-control">{{$paciente->NOM_PAC}}</span>
+            <label for="" class="label label-primary">Numero de Historia clinica:</label> <span class="form-control">{{'HCL-'.$paciente->id}}</span>
           </div>
           <div class="col-lg-8">
             <label for="" class="label label-primary">Alergias:</label> <input type="text" class="form-control" name="" placeholder="ALERGIAS" value="">
@@ -359,62 +443,13 @@
         </div>
         <div class="modal-footer col-lg-12">
           <button type="button" class="btn btn-success" name="button">Guardar</button>
-          <button type="button" class="btn btn-primary" name="button">+ Nueva nota de evolucion</button>
+          <a class="btn btn-warning" type="button">Imprimir Historia basica</a>
+          <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary" name="button">+ Nueva nota de evolucion</button>
         </div>
       </div>
     </form>
         <div id="Laboratorios" class="tabcontent">
-          <div  style="width:100%; background:#fff; margin-top:1%;">
-              <div class="alert alert-info" style="font-size:23px;">Laboratorios<a style="margin-left:50%;" onclick='javascript:preguntar({{ $id }});'  class="btn btn-warning">Volver al historial</a> <a target="_blank" style="margin-left:1%;" class = "btn btn-primary" onclick="javascript:pdflaboratorio();"><span class="fa fa-print"></span>
-                        Imprimir
-                      </a>
-
-                      <button type="submit" name="finreceta" style="margin-left:1%;" formtarget="" class = "btn btn-danger"  ><span class="fa fa-print"></span>
-                                Finalizar
-                              </button></div>
-              <div class="alert panel panel-success cuerpo" style="background:#fff; margin-top:-2.7%">
-                      <fieldset style="background-color:#BEEABE; padding: 2%;">
-                          <legend>
-                               Paciente
-                          </legend>
-                          <div class="form-group">
-                              <label class="col-lg-2">Apellido paterno: </label>
-                              <div class="col-lg-3">
-                                  <input type="text" class="form-control" name="" readonly="readonly" value="{{ $paciente->APA_PAC}}">
-                              </div>
-                              <label class="col-lg-2">Apellido materno: </label>
-                              <div class="col-lg-3">
-                                  <input type="text" class="form-control" readonly="readonly" name="" value="{{ $paciente->AMA_PAC}}">
-                              </div>
-                              <div style="float:right; margin-right:2%; margin-top: -5%; height:50px;"><output id="list"></output></div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-lg-2">Nombres: </label>
-                              <div class="col-lg-3">
-                                  <input type="text" readonly="readonly" class="form-control" name="" value="{{ $paciente->NOM_PAC}}">
-                              </div>
-                              <label class="col-lg-2">CI: </label>
-                              <div class="col-lg-3">
-                                  <input type="text" class="form-control" readonly="readonly" name="" value="{{ $paciente->CI_PAC}}">
-                              </div>
-                          </div>
-                          <div class="form-group">
-
-                              <label class="col-lg-2">Sexo: </label>
-                              <div class="col-lg-3">
-                                  <input type="text" readonly="readonly" class="form-control" name="" value="{{ $paciente->SEX_PAC}}">
-                              </div>                                   <label class="col-lg-2">Edad: </label>
-                              <div class="col-lg-3">
-                                  <input type="text" readonly="readonly" class="form-control" name="" value="<?php
-                $edad = \Carbon\Carbon::createFromFormat('Y-m-d', $paciente->FEC_NAC)->format('Y');
-                $edad2 = \Carbon\Carbon::createFromFormat('Y-m-d', $paciente->FEC_NAC)->format('m');
-                $edad3 = \Carbon\Carbon::createFromFormat('Y-m-d', $paciente->FEC_NAC)->format('d');
-                $categorias= \Darsalud\Categorialaboratorio::get();
-                 echo $date = \Carbon\Carbon::createFromDate($edad,$edad3,$edad2)->age;
-                 ?>">
-                              </div>
-                          </div>
-                          </fieldset>
+              <div class="alert panel panel-success cuerpo">
                       <fieldset style="background-color:#B9DEE3; padding: 2%;">
                           <legend>Lista de laboratorios</legend>
                           <div class="form-group">
@@ -448,76 +483,16 @@
           								<th width="15%" class="info">Categoria</th>
           								<th width="2%">&nbsp;</th>
           							</tr>
-          						</thead>
-
-
-          		<!-- fin de código: fila base -->
-
-          		<!-- Fila de ejemplo -->
-
-          		<!-- fin de código: fila de ejemplo -->
-
-
-          					</table>
+          						</thead></table>
                                </div>
-
+                   </div>
+                   <a target="_blank" style="margin-left:85%;" class = "btn btn-primary" onclick="javascript:pdflaboratorio();"><span class="fa fa-print"></span>
+                             Imprimir laboratorio
+                           </a>
                    </div>
                    </div>
-                   </div>
-        </div>
-
         <div id="Recetas" class="tabcontent">
-          <div  style="width:100%; background:#fff; margin-top:1%;">
-              <div class="alert alert-info" style="font-size:23px;">Recetas<a style="margin-left:50%;" onclick='javascript:preguntar({{ $id }});'  class="btn btn-warning">Volver al historial</a> <a target="_blank" style="margin-left:1%;" class = "btn btn-primary" onclick="javascript:pdfreceta();"><span class="fa fa-print"></span>
-                        Imprimir
-                      </a>
-
-                      <button type="submit" name="finreceta" style="margin-left:1%;" formtarget="" class = "btn btn-danger"  ><span class="fa fa-print"></span>
-                                Finalizar
-                              </button></div>
-              <div class="alert panel panel-success cuerpo" style="background:#fff; margin-top:-2.7%">
-                      <fieldset style="background-color:#BEEABE; padding: 2%;">
-                          <legend>
-                               Paciente
-                          </legend>
-                          <div class="form-group">
-                              <label class="col-lg-2">Apellido paterno: </label>
-                              <div class="col-lg-3">
-                                  <input type="text" class="form-control" name="" readonly="readonly" value="{{ $paciente->APA_PAC}}">
-                              </div>
-                              <label class="col-lg-2">Apellido materno: </label>
-                              <div class="col-lg-3">
-                                  <input type="text" class="form-control" readonly="readonly" name="" value="{{ $paciente->AMA_PAC}}">
-                              </div>
-                              <div style="float:right; margin-right:2%; margin-top: -5%; height:50px;"><output id="list"></output></div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-lg-2">Nombres: </label>
-                              <div class="col-lg-3">
-                                  <input type="text" readonly="readonly" class="form-control" name="" value="{{ $paciente->NOM_PAC}}">
-                              </div>
-                              <label class="col-lg-2">CI: </label>
-                              <div class="col-lg-3">
-                                  <input type="text" class="form-control" readonly="readonly" name="" value="{{ $paciente->CI_PAC}}">
-                              </div>
-                          </div>
-                          <div class="form-group">
-
-                              <label class="col-lg-2">Sexo: </label>
-                              <div class="col-lg-3">
-                                  <input type="text" readonly="readonly" class="form-control" name="" value="{{ $paciente->SEX_PAC}}">
-                              </div>                                   <label class="col-lg-2">Edad: </label>
-                              <div class="col-lg-3">
-                                  <input type="text" readonly="readonly" class="form-control" name="" value="<?php
-                $edad = \Carbon\Carbon::createFromFormat('Y-m-d', $paciente->FEC_NAC)->format('Y');
-                $edad2 = \Carbon\Carbon::createFromFormat('Y-m-d', $paciente->FEC_NAC)->format('m');
-                $edad3 = \Carbon\Carbon::createFromFormat('Y-m-d', $paciente->FEC_NAC)->format('d');
-
-                 echo $date = \Carbon\Carbon::createFromDate($edad,$edad3,$edad2)->age;
-                 ?>">
-                              </div>
-                          </div>
-                          </fieldset>
+                <div class="alert panel panel-success cuerpo">
                       <fieldset style="background-color:#B9DEE3; padding: 2%;">
                           <legend>Receta medica</legend>
                           <div class="form-group">
@@ -530,22 +505,13 @@
                       <button type = "submit" target="_blank" class = "btn btn-primary" data-dismiss = "modal"><span class="fa fa-print"></span>
                         Imprimir receta
                       </button>
-
-
                    </div>
         </div>
       </div>
-
-      <div id="Laboratorios" class="tabcontent">
-        <h3>Paris</h3>
-        <p>Paris is the capital of France.</p>
       </div>
 
-      <div id="Recetas" class="tabcontent">
-        <h3>Tokyo</h3>
-        <p>Tokyo is the capital of Japan.</p>
-      </div>
-    </div>
+
+
     </body>
     <script>
     // Get the element with id="defaultOpen" and click on it
