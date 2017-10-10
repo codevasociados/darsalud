@@ -92,61 +92,68 @@
               </div>
               <div class="row form-group">
                 <label for="" class="col-md-1">R:</label>
-                <span class="col-md-4"><input type="text" class="form-control" name="" value=""></span>
+                <span class="col-md-4"><input id="inputR" type="text" class="form-control" name="" value=""></span>
                 <label for="" class="col-md-1">N:</label>
-                <span class="col-md-4 "><input type="text" class="form-control" name="" value=""></span>
+                <span class="col-md-4 "><input id="inputN" type="text" class="form-control" name="" value=""></span>
               </div>
               <div class="row form-group">
                 <label for="" class="col-md-7">Edad actual:</label>
-                <span class="col-md-5"> 12</span>
+                <span class="col-md-5">
+                <?php
+                $edad = \Carbon\Carbon::createFromFormat('Y-m-d', $paciente->FEC_NAC)->format('Y');
+                $edad2 = \Carbon\Carbon::createFromFormat('Y-m-d', $paciente->FEC_NAC)->format('m');
+                $edad3 = \Carbon\Carbon::createFromFormat('Y-m-d', $paciente->FEC_NAC)->format('d');
+                $date = \Carbon\Carbon::createFromDate($edad,$edad2,$edad3)->age;
+                ?>{{$date}}</span>
               </div>
               <div class="row form-group">
                 <label for="" class="col-md-3">Peso:</label>
-                <span class="col-md-9"><input type="text" class="form-control" name="" value=""></span>
+                <span class="col-md-9"><input id="inputPeso" type="text" class="form-control" name="" value=""></span>
               </div>
               <div class="row form-group">
                 <label for="" class="col-md-3">Talla:</label>
-                <span class="col-md-9"><input type="text" class="form-control" name="" value=""></span>
+                <span class="col-md-9"><input type="text" id="inputTalla" class="form-control" name="" value=""></span>
               </div>
               <div class="row form-group">
                 <label for="" class="col-md-3">P.A.:</label>
-                <span class="col-md-9"><input type="text" class="form-control" name="" value=""></span>
+                <span class="col-md-9"><input type="text" id="inputPA" class="form-control" name="" value=""></span>
               </div>
               <div class="row form-group">
                 <label for="" class="col-md-3">F.C.:</label>
-                <span class="col-md-9"><input type="text" class="form-control" name="" value=""></span>
+                <span class="col-md-9"><input type="text" id="inputFC" class="form-control" name="" value=""></span>
               </div>
               <div class="row form-group">
                 <label for="" class="col-md-6">Temperatura:</label>
-                <span class="col-md-6"><input type="text" class="form-control" name="" value=""></span>
+                <span class="col-md-6"><input type="text" id="inputTem" class="form-control" name="" value=""></span>
               </div>
               <div class="row form-group">
                 <label for="" class="col-md-3">F.U.M:</label>
-                <span class="col-md-9"><input type="text" class="form-control" name="" value=""></span>
+                <span class="col-md-9"><input type="text" id="inputFUM" class="form-control" name="" value=""></span>
               </div>
             </div>
             <div class="col-md-9">
               <div class="row form-group">
                 <label for="" class="col-md-3">Subjetivo:</label>
-                <span class="col-md-9"><textarea name="name" rows="4" cols="80" class="form-control"></textarea></span>
+                <span class="col-md-9"><textarea name="name" id="inputSub" rows="4" cols="80" class="form-control"></textarea></span>
               </div>
               <div class="row form-group">
                 <label for="" class="col-md-3">Objetivo:</label>
-                <span class="col-md-9"><textarea name="name" rows="4" cols="80" class="form-control"></textarea></span>
+                <span class="col-md-9"><textarea name="name" rows="4" id="inputObj" cols="80" class="form-control"></textarea></span>
               </div>
               <div class="row form-group">
                 <label for="" class="col-md-3">Analisis:</label>
-                <span class="col-md-9"><textarea name="name" rows="4" cols="80" class="form-control"></textarea></span>
+                <span class="col-md-9"><textarea name="name" id="inputAna" rows="4" cols="80" class="form-control"></textarea></span>
               </div>
               <div class="row form-group">
                 <label for="" class="col-md-3">Plan de acción:</label>
-                <span class="col-md-9"><textarea name="name" rows="4" cols="80" class="form-control"></textarea></span>
+                <span class="col-md-9"><textarea name="name" rows="4" id="inputPlan" cols="80" class="form-control"></textarea></span>
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" id="guardarnota" onclick="guardarnota('{{$id}}','{{$ids}}');"><span class="fa fa-save"></span> Guardar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span> Cancelar</button>
         </div>
       </div>
 
@@ -572,12 +579,30 @@
       </fieldset>
       </div>
         </div>
+        <div id="notas" class="form-group row col-md-offset-2" style="width:80%">
+          <fieldset>
+            <legend>Notas de evolucion</legend>
+          <table class="table table-hover">
+            <thead>
+              <tr class="danger">
+                <td>Fecha</td>
+                <td>Acciones</td>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+          </fieldset>
+        </div>
         <div class="modal-footer col-lg-12">
           <button type="submit" class="btn btn-success" name="button">Guardar</button>
           <button class="btn btn-warning" type="submit">Imprimir Historia basica</button>
           <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary" name="button">+ Nueva nota de evolucion</button>
         </div>
+
       </div>
+
     </form>
         <div id="Laboratorios" class="tabcontent">
               <div class="alert panel panel-success cuerpo">
@@ -713,5 +738,31 @@
         		$(parent).remove();
         	});
       });
+    </script>
+    <script type="text/javascript">
+      function guardarnota(var1,var2){
+        e.preventDefault();
+        var n = $('#inputN').val();
+        var r = $('#inputR').val();
+        var peso = $('#inputPeso').val();
+        var talla = $('#inputTalla').val();
+        var pa = $('#inputPA').val();
+        var fc = $('#inputFC').val();
+        var temperatura = $('#inputTem').val();
+        var fum = $('#inputFUM').val();
+        var sub = $('#inputSub').val();
+        var obj = $('#inputObj').val();
+        var ana = $('#inputAna').val();
+        var plan = $('#inputPlan').val();
+        $.ajax({
+            type: "POST",
+            url: host + '/'var1+'/consultaexterna/'+var2+'/guardarnota',
+            data: {n,r,peso,talla,pa,fc,temperatura,fum,sub,obj,ana,plan},
+            success: function( msg ) {
+                $("#ajaxResponse").append("<div>"+msg+"</div>");
+            }
+        });
+
+      }
     </script>
     </html>

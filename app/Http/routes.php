@@ -78,6 +78,7 @@ Route::post('reportepersonalizado','PdfController@personalizado');
 
 Route::get('{id}/evaluacionpsicologica/{ids}','PacientesController@psicologica');
 Route::get('{id}/consultaexterna/{ids}','PacientesController@externa');
+Route::post('{id}/consultaexterna/{ids}/guardarnota','PacientesController@guardarnota');
 Route::get('{id}/evaluacionmedica/{ids}','PacientesController@medica');
 Route::get('{id}/evaluacionoftalmologica/{ids}','PacientesController@oftalmo');
 Route::get('{id}/evaluacionotorrinolaringologica/{ids}','PacientesController@otorrino');

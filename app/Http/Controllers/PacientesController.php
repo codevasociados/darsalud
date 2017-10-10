@@ -712,6 +712,10 @@ class PacientesController extends Controller
          $pendientes=Ticket::where('EST_TIC','>=',3)->where('EST_TIC','<',5)->join('pacientes','ID_PAC','=','pacientes.id')->join('users','ID_MED','=','users.id')->select('NOM_PAC','APA_PAC','AMA_PAC','ticket.id','EST_TIC','EVA_TIC','CI_PAC','ID_PAC','NOM_USU','APA_USU','AMA_USU','ARE_USU')->get();
         return view('pendientes')->with('pendientes',$pendientes);
     }
+
+    public function guardarnota(){
+      
+    }
     /**
      * Display the specified resource.
      *
